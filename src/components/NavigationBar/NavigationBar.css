@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+
+* {
+    font-family: 'Quicksand', sans-serif;
+}
+.navbar {
+    background-color:#fff !important;
+  }
+  
+  .navbar-brand {
+      font-size: 1.9rem;
+      color: #388e3c !important;
+      font-weight: 500;
+  }
+  
+  .logo {
+      width: 80px;
+      padding-bottom: 10px;
+  }
+  
+  .nav-link {
+      color: #A10AA4 !important;
+      font-weight: 500;
+  }
+  
+  .navbar a:hover {
+      color: #e137e4 !important;
+  }
+  
+  .menu_active {
+      font-weight: 700;
+      border-bottom: 1px solid #A10AA4;
+  }
+  
+  .navbar-toggler {
+      color: #fff !important;
+      border-color:#fff !important;
+  }
+
+  .query-button {
+      background-color: #BA14BD;
+      border: 0;
+      border-radius: 2px;
+      color: white;
+      font-weight: 500;
+  }
+
+  .query-button:hover {
+    box-shadow: 2px 2px 2px #BA14BD;
+  }
+  
+  
