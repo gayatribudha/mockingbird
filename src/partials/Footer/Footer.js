@@ -15,10 +15,10 @@ import tweeter from '../../assets/images/tweeter.png';
 export default function Footer() {
     return (
         <div className="container-fluid mr-md-0 mr-lg-0 pr-md-0 pr-lg-0">
-            <div className="ml-md-5 ml-lg-5 pl-md-4 pl-lg-4">
+            <div className="ml-md-5 ml-lg-5 pl-md-2 pl-lg-2">
                 <div className="title ml-2">Fly Further</div>
             </div>
-            <div className="row ml-md-5 ml-lg-5 pl-md-4 pl-lg-4 flex-column-reverse flex-md-row flex-lg-row">
+            <div className="row ml-md-5 ml-lg-5 pl-md-2 pl-lg-2 flex-column-reverse flex-md-row flex-lg-row">
                 <div className="col-sm-12 col-md-4 col-lg-4 ">
                     <div className="row">
 
