@@ -67,17 +67,17 @@ export default function Footer() {
                     </div>
                 </div >
                 <div className="col-sm-12 col-md-8 col-lg-8 mr-md-0 mr-lg-0 pr-sm-0 pr-md-0 pr-lg-0">
-                    <form className="">
+                    <form className="query-form">
                         <div className="mx-md-5 mx-lg-5 px-md-5 px-lg-5 py-md-5 py-lg-5 py-2">
-                            <div className="mx-3">
+                            <div className="mx-3 mr-md-5 mx-lg-5 px-md-3 px-lg-3">
                                 <h3 className="form-title">We are open to your queries.</h3>
                                 <p className="form-text">Feel free to send us if you have any. We make sure your
                             information remains confidential.</p>
                             </div>
-                            <div className="mx-3">
-                                <input type="text" className="form-input" placeholder="Name" />
-                                <input type="email" className="form-input mt-4" placeholder="Email" /> 
-                                <textarea className="text-area mt-4" placeholder="Query" /> 
+                            <div className="mx-3 mr-md-5 mx-lg-5 px-md-3 px-lg-3">
+                                <input type="text" className="form-input" placeholder="Name" /><br />
+                                <input type="email" className="form-input mt-4" placeholder="Email" /> <br />
+                                <textarea className="text-area mt-4" placeholder="Query" /> <br />
                                 <button className="form-button mt-4" type="submit">SEND</button>
                             </div>
                         </div>
