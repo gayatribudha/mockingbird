@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+* {
+    font-family: "Quicksand", sans-serif;
+}
+
+.title {
+    color: #A10AA4;
+    font-weight: 700;
+    font-size: 35px !important;
+}
+
+.hr-line {
+    background-color: #BA14BD;
+}
+
+.caption {
+    font-size: 23px;
+    color: #646464;
+    font-weight: 600;
+}

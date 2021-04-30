@@ -1,0 +1,20 @@
+h1 {
+    color: #908F90;
+    font-size: 45px !important;
+}
+
+h4 {
+    color: #7B787B;
+    font-weight: 700;
+}
+
+span {
+    font-size: 40px;
+    color: #730875;
+    font-weight: 700;
+}
+
+.learn-unlearn {
+    color: #646464 ;
+    font-weight: 700;
+}

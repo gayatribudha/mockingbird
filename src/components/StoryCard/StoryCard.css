@@ -1,0 +1,27 @@
+.profile-picture {
+    height: 110px;
+    width: 110px;
+}
+
+.story-author {
+    font-size: 17px !important;
+    font-weight: 400;
+    color:rgb(68, 68, 68)
+}
+
+.story-title {
+    color: #BA14BD;
+    font-weight: 500;
+    font-size: 23px !important;
+}
+
+.story-description {
+    color: #494949;
+    font-size: 17px !important;
+    font-weight: 500;
+
+}
+
+.bird-icon {
+    width: 50px;
+}
