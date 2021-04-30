@@ -12,7 +12,7 @@ import '../assets/css/home.css';
 export default function Home() {
     return (
         <div className="container-fluid">
-            <section className="landin-section">
+            <section className="landing-section">
                 <LandingPage />
             </section>
             <section className="blog-section">
