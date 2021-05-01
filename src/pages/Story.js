@@ -41,7 +41,7 @@ function NextArrow(props) {
 
 
 
-export default class Home extends Component {
+export default class Story extends Component {
 
     constructor(props) {
         super(props);

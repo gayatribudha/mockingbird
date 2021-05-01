@@ -2,7 +2,6 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 
 import logo from '../../assets/images/logo.png';
-import toggleButton from '../../assets/images/toggleButton.svg';
 
 import './NavigationBar.css';
 
@@ -11,7 +10,7 @@ export default function NavigationBar() {
   return (
     <div className="container-fluid px-md-5 px-lg-5">
       <nav className="navbar navbar-expand-lg navbar-light">
-        <img className="mt-4" src={logo} alt="logo" />
+        <NavLink to="/"><img className="mt-4" src={logo} alt="logo" /></NavLink>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <svg width="34" height="23" viewBox="0 0 34 23" fill="none" xmlns="http://www.w3.org/2000/svg">
             <line y1="1" x2="34" y2="1" stroke="#730875" stroke-width="2" />

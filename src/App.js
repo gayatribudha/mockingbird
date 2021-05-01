@@ -3,6 +3,8 @@ import Home from './pages/Home';
 import Blog from './pages/Blog';
 import Story from './pages/Story';
 import BeAPart from './pages/BeAPart';
+
+
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";

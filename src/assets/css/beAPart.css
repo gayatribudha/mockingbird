@@ -34,6 +34,10 @@
     letter-spacing: 1.9px;
 }
 
+.login-input:hover {
+    border: 1px solid #ba14bd;
+
+}
 
 .login-input:focus {
     border: 1px solid #ba14bd;
@@ -43,7 +47,7 @@
     background-color: #ba14bd;
     border-radius: 20px;
     color: white;
-    padding: 5px;
+    padding: 7px;
     width: 150px;
     border: 0px;
     font-size: 15px;
@@ -65,4 +69,9 @@
 
 .bottom-text {
     font-size: 13px;
+}
+
+.login-link-button {
+    border: 0px;
+    background-color: white;
 }

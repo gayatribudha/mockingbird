@@ -4,7 +4,7 @@ import BlogCard from '../components/BlogCard/BlogCard';
 import Footer from '../partials/Footer/Footer';
 
 
-export default function Home() {
+export default function Blog() {
     return (
         <div className="container-fluid">
             <div className="row mt-3 mx-md-5 mx-lg-5 px-md-4 px-lg-4 ">
