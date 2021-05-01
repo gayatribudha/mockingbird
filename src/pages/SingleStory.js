@@ -1,12 +1,12 @@
 import React from 'react';
 import profile from '../assets/images/profile.jpg';
-
+import Footer from '../partials/Footer/Footer';
 
 export default function SingleStory() {
     return (
         <div className="container-fluid">
-            <div className="row mt-5 mx-md-5 mx-lg-5 px-md-5 px-lg-5 ">
-                <div className="col mx-md-5 mx-lg-5 px-md-5 px-lg-5 d-flex flex-column">
+            <div className="row my-5 mx-md-5 mx-lg-5 px-md-5 px-lg-5 ">
+                <div className="col mb-5 mx-md-5 mx-lg-5 px-md-5 px-lg-5 d-flex flex-column">
                     <img className="profile-picture rounded-circle mx-auto" src={profile} alt="profile image" />
 
                     <h2 className="story-author text-center mt-3">Shreywont Khanal</h2>
@@ -31,9 +31,10 @@ export default function SingleStory() {
                     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
                     pariatur.
 
-</p>
+                    </p>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 
