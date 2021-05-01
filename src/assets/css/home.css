@@ -1,7 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+@import 
 
 * {
     font-family: "Quicksand", sans-serif;
+}
+
+.background {
+    background-image: url("../images/bg.png"); 
+    background-repeat: no-repeat; 
+    background-position: right;
+    background-size: contain;
+    margin-right: 200px;
 }
 
 .title {
@@ -19,3 +28,24 @@
     color: #646464;
     font-weight: 600;
 }
+
+@media screen and (max-width: 992px) {
+    .background {
+        margin-right: -100px;
+    }
+    .home-text {
+        width: 200px;
+    }
+    .main-text {
+        font-size: 30px !important;
+        font-weight: 500;
+    }
+    .mockingbird {
+        font-size: 25px;
+    }
+    .home-caption {
+        font-size: 18px;
+        width: 150px;
+    }
+    
+  }

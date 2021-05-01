@@ -15,7 +15,7 @@ export default function Home() {
             <section className="landing-section">
                 <LandingPage />
             </section>
-            <section className="blog-section">
+            <section className="blog-section" id="blog-section">
                 <div className="row mt-5 pt-5 mx-md-5 mx-lg-5 px-md-4 px-lg-4">
                     <div className="col">
                         <div className="row">
