@@ -34,7 +34,7 @@ export default function NavigationBar() {
               <NavLink activeClassName="menu_active" className="nav-link" to="/beapart">Be A Part</NavLink>
             </li>
             <li className="nav-item mx-2">
-              <button className="query-button mt-2">Query</button>
+              <a href="#footer"><button className="query-button mt-2">Query</button></a>
             </li>
           </ul>
         </div>

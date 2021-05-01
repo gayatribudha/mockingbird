@@ -14,7 +14,7 @@ import tweeter from '../../assets/images/tweeter.png';
 
 export default function Footer() {
     return (
-        <div className="container-fluid mr-md-0 mr-lg-0 pr-md-0 pr-lg-0">
+        <div className="container-fluid mr-md-0 mr-lg-0 pr-md-0 pr-lg-0" id="footer">
             <div className="ml-md-5 ml-lg-5 pl-md-2 pl-lg-2">
                 <div className="title ml-2">Fly Further</div>
             </div>
