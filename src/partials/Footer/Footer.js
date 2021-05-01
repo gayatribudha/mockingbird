@@ -25,7 +25,7 @@ export default function Footer() {
                         <div className="col">
                             <div className="mt-4">
                                 <h2>Be a part of Mockingbird.</h2>
-                                <button className="beapart-button mt-2">Be a part</button>
+                                <a href="/beapart"><button className="beapart-button mt-2">Be a part</button></a>
                             </div>
                         </div>
                     </div>
