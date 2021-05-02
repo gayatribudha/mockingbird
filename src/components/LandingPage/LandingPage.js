@@ -1,6 +1,6 @@
 import React from 'react'
-import bg from '../../assets/images/bg.png';
 import downArrow from '../../assets/images/downArrow.png';
+import { Link, animateScroll as scroll } from "react-scroll";
 
 import './LandingPage.css';
 
@@ -15,7 +15,15 @@ export default function LandingPage() {
                 </div>
                 <div className="mt-5 py-md-2 py-lg-2 ">
                     <p className="learn-unlearn">Way to Learn and Unlearn.
-                        <a href="#blog-section"><img className="ml-3" src={downArrow} alt="down arrow" /></a>
+                        <Link activeClass="active"
+                            to="blog-section"
+                            spy={true}
+                            smooth={true}
+                            offset={-70}
+                            duration={500}
+                        >
+                            <img className="ml-3" src={downArrow} alt="down arrow" />
+                        </Link>
                     </p>
                 </div>
             </div>

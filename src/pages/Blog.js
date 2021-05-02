@@ -17,7 +17,7 @@ export default function Blog() {
             </div>
             <div className="row mt-3 mb-5 mx-md-5 mx-md-3 px-md-4 px-lg-4 ">
                 {
-                    [1, 2, 3, 4, 5, 6].map(n => (
+                    [1, 2, 3, 4].map(n => (
                         <div key={n} className="col-sm-12 col-md-6 col-md-6 mt-4 ">
                             <BlogCard />
                         </div>
