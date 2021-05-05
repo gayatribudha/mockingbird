@@ -21,7 +21,9 @@ app.use('/blogs', blog);
 
 
 // Database Connection
+
 mongoose.connect('mongodb://localhost/mockingbird', {useNewUrlParser: true});
+mongoose.set('useFindAndModify', false);
 
 mongoose.connection.once('open', function () {
     console.log('Database connected Successfully');
