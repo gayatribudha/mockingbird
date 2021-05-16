@@ -5,6 +5,10 @@
     font-size: 18px;
 }
 
+.sidebar {
+    height: 100vh;
+}
+
 .user_photo {
     width: 100px;
     height: 100px;
@@ -23,13 +27,8 @@
 .sb-user-email {
     font-size: 13px;
     color: #888787;
-}
+}   
 
-
-
-.navbar {
-    background-color: #fff !important;
-}
 
 .logo {
     width: 80px;
@@ -45,15 +44,26 @@
     color: #e137e4 !important;
 }
 
+.sidebar-nav-item a:hover{
+    text-decoration: none;
+}
+
+.sidebar-nav-link:hover > .icon path { 
+    fill:#e137e4;
+ }
+
+
 .sidebar-menu_active {
     font-weight: 700;
     color: #BA14BD;
-    border-bottom: #fff;
+}
+
+.sidebar-menu_active > .icon path {
+    fill:#BA14BD;
 }
 
 .sidebar-navbar-toggler {
     color: #fff !important;
-    border-color: #fff;
 }
 
 ul {
@@ -64,6 +74,58 @@ ul {
     .navbar,
     .navbar-collapse {
         flex-direction: column;
+    }
+}
+
+
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#phone-sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+    background: #ffffff;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.phone-navbar {
+    color: #f6f6f6;
+}
+
+.phone-sidebar-toggler {
+   background-color: white;
+   border: 0px #ffffff;
+}
+
+#phone-sidebar.active {
+    margin-left: -250px;
+}
+
+#phone-sidebar .phone-sidebar-header {
+    padding: 20px;
+}
+
+
+#phone-sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+
+
+
+@media (max-width: 768px) {
+    #phone-sidebar {
+        margin-left: -250px;
+    }
+    #phone-sidebar.active {
+        margin-left: 0;
     }
 }
 

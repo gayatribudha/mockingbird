@@ -12,7 +12,7 @@ import './SideBar.css';
 export default function SideBar() {
     return (
 
-        <nav className="navbar navbar-expand-lg float-left position-absolute">
+        <nav className="navbar navbar-expand-lg float-left sidebar-navbar">
             <button className="navbar-toggler sidebar-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <svg width="34" height="23" viewBox="0 0 34 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <line y1="1" x2="34" y2="1" stroke="#730875" stroke-width="2" />
