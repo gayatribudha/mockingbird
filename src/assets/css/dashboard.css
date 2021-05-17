@@ -16,6 +16,12 @@
     font-size: 40px;
 }
 
+.d-blog-sub-title {
+    color: #BA14BD;
+    font-size: 10px;
+    font-weight: 700;
+}
+
 .create-blog-btn {
     background-color: #ba14bd;
     color: white;
@@ -27,6 +33,16 @@
 
 .create-blog-btn:hover {
     box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.25);
+}
+
+.create-box {
+    background-color: white;
+}
+
+.input-field {
+    border: 0px;
+    border-radius: 10px;
+    background-color: #EBEBEB;
 }
 
 .delete-btn {
@@ -83,6 +99,7 @@
     .create-blog-title {
         font-size: 25px !important;
     }
+
 
     .create-blog-btn {
         background-color: #ba14bd;
