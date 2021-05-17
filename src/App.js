@@ -12,6 +12,11 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import DashBlog from './pages/Dashboard/DashBlog';
 import DashStory from './pages/Dashboard/DashStory';
 import DashProfile from './pages/Dashboard/DashProfile';
+import CreateBlog from './pages/Dashboard/CreateBlog';
+import ShowBlog from './pages/Dashboard/ShowBlog';
+
+
+
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -58,6 +63,9 @@ function App() {
         <DashboardRoute exact path="/dashboard/blog" component={DashBlog}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/story" component={DashStory}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/profile" component={DashProfile}></DashboardRoute>
+        <DashboardRoute exact path="/dashboard/show-blog" component={ShowBlog}></DashboardRoute>
+
+        <DashboardRoute exact path="/dashboard/create-blog" component={CreateBlog}></DashboardRoute>
 
       </Router>
     </div >

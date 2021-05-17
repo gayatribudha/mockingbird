@@ -16,6 +16,58 @@
     font-size: 40px;
 }
 
+.create-blog-btn {
+    background-color: #ba14bd;
+    color: white;
+    padding: 5px 40px 6px 20px;
+    border: 0px;
+    border-radius: 50px;
+    font-weight: 700;
+}
+
+.create-blog-btn:hover {
+    box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.25);
+}
+
+.delete-btn {
+    background-color: white;
+    color: #ba14bd;
+    border: 1px solid #ba14bd;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 5px 20px 5px 20px;
+}
+
+.delete-btn:hover {
+    background-color: #ba14bd;
+    color: white;
+    border: 1px solid #ba14bd;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 5px 20px 5px 20px;
+}
+
+.d-blog-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.d-blog-card h3 {
+    font-weight: 700;
+}
+
+.d-blog-card p {
+    font-size: 15.5px;
+}
+
+.d-blog-card:hover {
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
     .dashboard-content {
         margin: auto;
@@ -27,9 +79,22 @@
     .dash-title {
         font-size: 32px !important;
     }
+
+    .create-blog-title {
+        font-size: 25px !important;
+    }
+
+    .create-blog-btn {
+        background-color: #ba14bd;
+        color: white;
+        font-weight: 700;
+        border: 0px;
+        border-radius: 50px;
+        font-size: 15px;
+    }
 }
 
-@media (min-width: 768px) and (max-width: 991.98px) { 
+@media (min-width: 768px) and (max-width: 991.98px) {
     .dashboard-content {
         margin: auto;
         width: 50%;
