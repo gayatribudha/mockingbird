@@ -8,12 +8,17 @@ import Story from './pages/Story';
 import BeAPart from './pages/BeAPart';
 import SingleStory from './pages/SingleStory';
 import SingleBlog from './pages/SingleBlog';
+
 import Dashboard from './pages/Dashboard/Dashboard';
-import DashBlog from './pages/Dashboard/DashBlog';
-import DashStory from './pages/Dashboard/DashStory';
 import DashProfile from './pages/Dashboard/DashProfile';
-import CreateBlog from './pages/Dashboard/CreateBlog';
+
+import DashBlog from './pages/Dashboard/DashBlog';
 import ShowBlog from './pages/Dashboard/ShowBlog';
+import CreateBlog from './pages/Dashboard/CreateBlog';
+
+import DashStory from './pages/Dashboard/DashStory';
+import ShowStory from './pages/Dashboard/ShowStory';
+import CreateStory from './pages/Dashboard/CreateStory';
 
 
 
@@ -61,11 +66,13 @@ function App() {
 
         <DashboardRoute exact path="/dashboard" component={Dashboard}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/blog" component={DashBlog}></DashboardRoute>
-        <DashboardRoute exact path="/dashboard/story" component={DashStory}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/profile" component={DashProfile}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/show-blog" component={ShowBlog}></DashboardRoute>
-
         <DashboardRoute exact path="/dashboard/create-blog" component={CreateBlog}></DashboardRoute>
+
+        <DashboardRoute exact path="/dashboard/story" component={DashStory}></DashboardRoute>
+        <DashboardRoute exact path="/dashboard/show-story" component={ShowStory}></DashboardRoute>
+        <DashboardRoute exact path="/dashboard/create-story" component={CreateStory}></DashboardRoute>
 
       </Router>
     </div >

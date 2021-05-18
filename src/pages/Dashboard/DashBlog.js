@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import '../../assets/css/dashboard.css';
 
 
-export default function Dashboard() {
+export default function DashBlog() {
     return (
         <div className="dashboard">
             <div className="row px-3 px-md-5 pt-lg-5 flex flex-row">
