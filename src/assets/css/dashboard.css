@@ -1,5 +1,5 @@
 .dashboard {
-    background-color: #f6f6f6;
+    background-color: #FAFAFA;
     width: 100vw;
     min-height: 100vh;
 }
@@ -93,6 +93,36 @@
     cursor: pointer;
 }
 
+#profile-wrapper {
+    margin-left: 450px;
+    margin-right: 200px;
+    padding-top: 150px;
+}
+
+#profile-content {
+    padding: 10px;
+}
+
+.p-user-name {
+    font-size: 25px;    
+    font-weight: 700;
+}
+
+.p-user-email {
+    font-size: 17px;
+    color: #888787;
+} 
+
+.p-bio {
+    color: #4D4D4D;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.p-contact {
+    font-size: 15px;
+}
+
 @media screen and (max-width: 768px) {
     .dashboard-content {
         margin: auto;
@@ -109,7 +139,6 @@
         font-size: 25px !important;
     }
 
-
     .create-blog-btn {
         background-color: #ba14bd;
         color: white;
@@ -121,6 +150,16 @@
 
     .form-field {
         width: 100%;
+    }
+
+    #profile-wrapper {
+        margin-left: 30px;
+        padding-top: 100px;
+        margin-right: 10px;
+    }
+
+    #profile-content {
+        padding: 10px;
     }
 }
 
@@ -134,5 +173,11 @@
     }
     .dash-title {
         font-size: 32px !important;
+    }
+
+    #profile-wrapper {
+        margin-left: 100px;
+        padding-top: 100px;
+        margin-right: 5px;
     }
 }

@@ -9,8 +9,8 @@ export default function Dashboard() {
         <div className="dashboard">
             <div className="dashboard-content">
 
-                <h1 className=" dash-title title text-center ">Welcome to Mockingbird.</h1>
-                <h2>Create your own Blogs and Stories.</h2>
+                <h1 className=" dash-title title text-center ">Hey Mockingbird!!</h1>
+                <h2>Write and share your own Blogs and Stories.</h2>
                 <img className="mt-5" src={birdIcon} alt="bird-icon" />
 
             </div>
