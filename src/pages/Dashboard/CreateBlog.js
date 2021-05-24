@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { DefaultEditor } from 'react-simple-wysiwyg';
 
 import '../../assets/css/dashboard.css';
 
 
 export default function CreateBlog() {
+    const [html, setHtml] = React.useState('my <b>HTML</b>');
+  
+  function onChange(e) {
+    setHtml(e.target.value);
+  }
     return (
         <div className="dashboard">
             <div className="row px-3 px-md-5 pt-lg-5">
@@ -14,12 +20,14 @@ export default function CreateBlog() {
             </div>
             <div className="row px-3     px-md-0 px-lg-0">
                 <div className="col mx-2 mx-md-5 mx-lg-5 my-md-3  create-box">
-                    <form>  
+                    <form>
                         <div className="px-1 py-1 px-md-3 px-lg-3 pt-md-3 pt-lg-3">
-                            <label className="form-label">Title</label><br />
+                            <label className="form-label">Blog Title</label><br />
                             <input className="form-field mt-0" type="text"></input><br />
-                            <label className="form-label mt-3">Description</label> <br />
-                            <textarea rows="10" className="mt-0" type="text" style={{ width: "100%" }}></textarea>
+                            <label className="form-label mt-3">Blog</label> <br />
+                            <DefaultEditor value={html} onChange={onChange} />
+                            {/* <textarea rows="10" className="mt-0" type="text" style={{ width: "100%" }}></textarea> */}
+
                         </div>
                         <div className="mb-3 px-1 px-md-3 px-lg-3">
                             <button type="submit" className="delete-btn">Save</button>
