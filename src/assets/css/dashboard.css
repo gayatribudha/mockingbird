@@ -53,6 +53,11 @@
     width: 50%;
 }
 
+.form-field:focus {
+    border: 1px solid  #BA14BD;
+    background-color: white;
+}
+
 
 .delete-btn {
     background-color: white;
