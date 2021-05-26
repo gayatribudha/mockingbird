@@ -33,56 +33,56 @@ export default function DashProfile() {
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div className="modal-body row">
+                                            <div className="modal-body">
                                                 <div className="col">
                                                     <div className="row">
-                                                        <div className="col-12 col-md-3 col-lg-3">
+                                                        <div className="col-12 col-md-4 col-lg-4">
                                                             <label className="form-label">Name</label>
                                                         </div>
-                                                        <div className=" col-12 col-md-9 col-lg-9">
+                                                        <div className=" col-12 col-md-8 col-lg-8">
                                                             <input type="text" className="profile-update-form" name="name" />
                                                         </div>
                                                     </div>
                                                     <div className="row mt-2 mt-md-3 mt-lg-3">
-                                                        <div className="col-12 col-md-3 col-lg-3">
+                                                        <div className="col-12 col-md-4 col-lg-4">
                                                             <label className="form-label">Email</label>
                                                         </div>
-                                                        <div className="col-12 col-md-9 col-lg-9">
+                                                        <div className="col-12 col-md-8 col-lg-8">
                                                             <input type="email" className="profile-update-form" name="email" />
                                                         </div>
                                                     </div>
                                                     <div className="row mt-2 mt-md-3 mt-lg-3">
-                                                        <div className="col-12 col-md-3 col-lg-3">
+                                                        <div className="col-12 col-md-4 col-lg-4">
                                                             <label className="form-label">Address</label>
                                                         </div>
-                                                        <div className="col-12 col-md-9 col-lg-9">
+                                                        <div className="col-12 col-md-8 col-lg-8">
                                                             <input type="text" className="profile-update-form" name="address" />
                                                         </div>
                                                     </div>
                                                     <div className="row mt-2 mt-md-3 mt-lg-3">
-                                                        <div className="col-12 col-md-3 col-lg-3">
+                                                        <div className="col-12 col-md-4 col-lg-4">
                                                             <label className="form-label">Contact</label>
                                                         </div>
-                                                        <div className="col-12 col-md-9 col-lg-9">
+                                                        <div className="col-12 col-md-8 col-lg-8">
                                                             <input type="text" className="profile-update-form" name="contact" />
                                                         </div>
                                                     </div>
                                                     <div className="row mt-2 mt-md-3 mt-lg-3">
-                                                        <div className="col-12 col-md-3 col-lg-3">
+                                                        <div className="col-12 col-md-4 col-lg-4">
                                                             <label className="form-label">Bio</label>
                                                         </div>
-                                                        <div className="col-12 col-md-9 col-lg-9">
-                                                            <textarea type="text" className="profile-update-form" name="bio" ></textarea>
+                                                        <div className="col-12 col-md-8 col-lg-8">
+                                                            <textarea type="text" cols="19" className="profile-update-form" name="bio" ></textarea>
                                                         </div>
                                                     </div>
                                                     <div className="row mt-2 mt-md-3 mt-lg-3">
-                                                        <div className="col-md-3 col-lg-3">
-                                                            <label className="form-label">ProfilePicture</label>
+                                                        <div className="col-12 col-md-4 col-lg-4">
+                                                            <label className="form-label">Profile Picture</label>
                                                         </div>
-                                                        <div className="col-md-6 col-lg-6 profile-upload-btn-wrap">
+                                                        <div className="col-12 col-md-7 col-lg-7 profile-upload-btn-wrap">
                                                             <label className="profile-upload-btn" for="upload">
                                                                 Upload from here
-                                                                <svg className="ml-3" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#ffffff"><g><rect fill="none" height="24" width="24" /></g><g><path d="M18,15v3H6v-3H4v3c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-3H18z M7,9l1.41,1.41L11,7.83V16h2V7.83l2.59,2.58L17,9l-5-5L7,9z" /></g></svg>
+                                                                <svg className="ml-5" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#ffffff"><g><rect fill="none" height="24" width="24" /></g><g><path d="M18,15v3H6v-3H4v3c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-3H18z M7,9l1.41,1.41L11,7.83V16h2V7.83l2.59,2.58L17,9l-5-5L7,9z" /></g></svg>
                                                             </label>
                                                             <input id="upload" type="file" />
                                                         </div>
