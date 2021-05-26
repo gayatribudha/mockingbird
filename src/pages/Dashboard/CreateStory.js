@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from "react-router-dom";
-import { DefaultEditor } from 'react-simple-wysiwyg';
+
+import { Editor } from '@tinymce/tinymce-react';
+
 
 import '../../assets/css/dashboard.css';
 
 
 export default function CreateStory() {
-    const [html, setHtml] = React.useState('my <b>HTML</b>');
 
-    function onChange(e) {
-        setHtml(e.target.value);
-    }
+    const editorRef = useRef(null);
+
     return (
         <div className="dashboard">
             <div className="row px-3 px-md-5 pt-lg-5">
@@ -25,8 +25,29 @@ export default function CreateStory() {
                             <label className="form-label">Story Title</label><br />
                             <input className="form-field mt-0" type="text"></input><br />
                             <label className="form-label mt-3">Story</label> <br />
-                            <DefaultEditor value={html} onChange={onChange} />
-            
+
+
+                            <Editor
+                                textareaName='description'
+                                apiKey='ae8usjpq17flqzzs5cmkknz85iso0czxaieq68evxqpqg377'
+                                onInit={(evt, editor) => editorRef.current = editor}
+                                initialValue="<p>Write your story here :)</p>"
+                                init={{
+                                    height: 300,
+                                    menubar: false,
+                                    plugins: [
+                                        'advlist autolink lists link image charmap print preview anchor',
+                                        'searchreplace visualblocks code fullscreen',
+                                        'insertdatetime media table paste code help wordcount'
+                                    ],
+                                    toolbar: 'undo redo | formatselect | ' +
+                                        'bold italic backcolor | alignleft aligncenter ' +
+                                        'alignright alignjustify | bullist numlist outdent indent',
+                                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                                }}
+                            />
+
+
                             {/* <textarea rows="10" className="mt-0" type="text" style={{ width: "100%" }}></textarea> */}
                         </div>
                         <div className="mb-3 px-1 px-md-3 px-lg-3">
