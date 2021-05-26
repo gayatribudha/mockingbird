@@ -1,6 +1,5 @@
 import React from 'react'
 import '../../assets/css/dashboard.css';
-import SideBar from '../../components/SideBar/SideBar';
 import birdIcon from '../../assets/images/birdIcon.png';
 
 

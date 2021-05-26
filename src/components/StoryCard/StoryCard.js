@@ -9,7 +9,7 @@ export default function StoryCard() {
         <div className="row">
             <div className="col d-flex flex-column">
 
-                <img className="profile-picture rounded-circle mx-auto" src={profile} alt="profile image" />
+                <img className="profile-picture rounded-circle mx-auto" src={profile} alt="profile" />
 
                 <h2 className=" story-author text-center mt-3">Shreywont Khanal</h2>
                 <a style={{textDecoration: "none"}} href="/story/title"><h2 className=" story-title text-center">The only option I has was to stay.</h2></a>

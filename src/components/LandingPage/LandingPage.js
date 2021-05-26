@@ -1,6 +1,6 @@
 import React from 'react'
 import downArrow from '../../assets/images/downArrow.png';
-import { Link, animateScroll as scroll } from "react-scroll";
+import { Link } from "react-scroll";
 
 import './LandingPage.css';
 

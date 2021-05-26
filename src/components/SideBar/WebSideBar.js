@@ -18,9 +18,6 @@ $(document).ready(function () {
 
 
 export default class WebSideBar extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
@@ -31,7 +28,7 @@ export default class WebSideBar extends Component {
                         <NavLink to="/dashboard"><img className="mt-4" src={logo} alt="logo" /></NavLink>
 
                         <div className="mt-2 text-center">
-                            <img className="user_photo rounded-circle" src={pp} alt="profile-picture" />
+                            <img className="user_photo rounded-circle" src={pp} alt="profile" />
                             <p className="sb-user-name mt-1 mb-0 text-center">Rita Ora</p>
                             <p className="sb-user-email" >ritaora@gmail.com</p>
                             <hr className="sb-hr-line" />
@@ -117,7 +114,7 @@ export default class WebSideBar extends Component {
                             <NavLink to="/dashboard"><img src={logo} alt="logo" /></NavLink>
 
                             <div className=" text-center">
-                                <img className="user_photo rounded-circle" src={pp} alt="profile-picture" />
+                                <img className="user_photo rounded-circle" src={pp} alt="profile" />
                                 <p className="sb-user-name mb-0 text-center">Rita Ora</p>
                                 <p className="sb-user-email" >ritaora@gmail.com</p>
                                 <hr className="sb-hr-line" />

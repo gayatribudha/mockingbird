@@ -7,7 +7,7 @@ export default function SingleStory() {
         <div className="container-fluid">
             <div className="row my-5 mx-md-5 mx-lg-5 px-md-5 px-lg-5 ">
                 <div className="col mb-5 mx-md-5 mx-lg-5 px-md-5 px-lg-5 d-flex flex-column">
-                    <img className="profile-picture rounded-circle mx-auto" src={profile} alt="profile image" />
+                    <img className="profile-picture rounded-circle mx-auto" src={profile} alt="profile" />
 
                     <h2 className="story-author text-center mt-3">Shreywont Khanal</h2>
                     <a style={{ textDecoration: "none" }} href="/story/title"><h2 className=" mt-3 story-title text-center">The only option I has was to stay.</h2></a>

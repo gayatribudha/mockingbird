@@ -1,5 +1,4 @@
 import NavigationBar from './components/NavigationBar/NavigationBar';
-import SideBar from './components/SideBar/SideBar';
 import WebSideBar from './components/SideBar/WebSideBar';
 
 import Home from './pages/Home';
