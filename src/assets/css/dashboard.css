@@ -1,5 +1,5 @@
 .dashboard {
-    background-color: #FAFAFA;
+    background-color: #fafafa;
     width: 100vw;
     min-height: 100vh;
 }
@@ -17,7 +17,7 @@
 }
 
 .d-blog-sub-title {
-    color: #BA14BD;
+    color: #ba14bd;
     font-size: 10px;
     font-weight: 700;
 }
@@ -42,22 +42,21 @@
 .form-label {
     font-size: 16px;
     font-weight: 500;
-    color:#6d6d6d
+    color: #6d6d6d;
 }
 
 .form-field {
     border: 0px;
     border-radius: 10px;
-    background-color: #EBEBEB;
+    background-color: #ebebeb;
     height: 35px;
     width: 50%;
 }
 
 .form-field:focus {
-    border: 1px solid  #BA14BD;
+    border: 1px solid #ba14bd;
     background-color: white;
 }
-
 
 .delete-btn {
     background-color: white;
@@ -109,19 +108,57 @@
 }
 
 .p-user-name {
-    font-size: 25px;    
+    font-size: 25px;
     font-weight: 700;
 }
 
 .p-user-email {
     font-size: 17px;
     color: #888787;
-} 
+}
 
 .p-bio {
-    color: #4D4D4D;
+    color: #4d4d4d;
     font-size: 16px;
     font-weight: 500;
+}
+
+.profile-update-form {
+    border: 0px;
+    background-color: #ebebeb;
+    border-radius: 10px;
+}
+
+.profile-update-form:focus {
+    border: 1px solid #ba14bd;
+    border-radius: 10px;
+    background-color: white;
+}
+
+input[type="file"] {
+    position: absolute;
+    z-index: -1;
+    top: 10px;
+    left: 8px;
+    font-size: 17px;
+    color: #b8b8b8;
+}
+.profile-upload-btn-wrap {
+    position: relative;
+}
+.profile-upload-btn {
+    padding: 12px 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #919191;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    width: 100%;
+}
+
+.profile-upload-btn:hover {
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.25);
 }
 
 .p-contact {
