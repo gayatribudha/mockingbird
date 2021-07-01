@@ -1,9 +1,12 @@
 //importing blog model
 const Blog = require('../models/blog_model');
 
-//creating controller functions for blog routes
-exports.home = function (req, res) {
-    res.send('Welcome to Mockingbird.');
+// list all stored blogs
+exports.list_blogs = function (req, res) {
+    Blog.find(function (err, blog) {
+        if (err) return next(err);
+        res.send(blog);
+    })
 };
 
 //create blog

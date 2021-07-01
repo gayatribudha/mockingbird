@@ -2,6 +2,14 @@
 const Story = require('../models/story_model');
 
 
+// list all stored stories
+exports.list_stories = function (req, res) {
+    Story.find(function (err, story) {
+        if (err) return next(err);
+        res.send(story);
+    })
+};
+
 //create story
 exports.createStory = function(req, res){
     const story = new Story({

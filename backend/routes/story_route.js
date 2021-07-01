@@ -4,6 +4,9 @@ const router = express.Router();
 // importing controller for story
 const story_controller = require('../controllers/story_controller');
 
+// list all stored stories
+router.get('/', story_controller.list_stories);
+
 // create routes
 router.post('/create-story', story_controller.createStory); //create story
 

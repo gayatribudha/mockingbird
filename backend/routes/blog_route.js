@@ -5,7 +5,7 @@ const router = express.Router();
 const blog_controller = require('../controllers/blog_controller');
 
 // create routes
-router.get('/', blog_controller.home);
+router.get('/', blog_controller.list_blogs);
 
 router.post('/create-blog', blog_controller.createBlog); //create blog
 
