@@ -23,6 +23,7 @@ export default function DashStory() {
                                 </svg>
                             </button>
                         </Link>
+
                     </div>
                 </div>
             </div>
@@ -38,6 +39,9 @@ export default function DashStory() {
                         Velit porro qui quo autem aut porro recusandae a.</p>
                                 </div>
                             </Link>
+                            <form>
+                                <p class="hola"> Publish <input className="publish-checkbox" type="checkbox" name="publish" /></p>
+                            </form>
                         </div>
                     ))
                 }

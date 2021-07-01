@@ -35,9 +35,12 @@ export default function DashBlog() {
 
                                     <h3 className="blog-title">Inside the city of glass and steel.</h3>
                                     <p className="blog-para">Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu.
-                        Velit porro qui quo autem aut porro recusandae a.</p>
+                                    Velit porro qui quo autem aut porro recusandae a.</p>
                                 </div>
                             </Link>
+                            <form>
+                                <p >Publish <input className="publish-checkbox" type="checkbox" name="publish" /></p>
+                            </form>
                         </div>
                     ))
                 }

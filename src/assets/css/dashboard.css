@@ -35,6 +35,10 @@
     box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.25);
 }
 
+/* input:checked ~ .checkmark {
+    background-color: red;
+} */
+
 .create-box {
     background-color: white;
 }
@@ -163,6 +167,10 @@ input[type="file"] {
 
 .p-contact {
     font-size: 15px;
+}
+
+input[type="checkbox"]:checked {
+    background-color: red;;
 }
 
 @media screen and (max-width: 768px) {
