@@ -173,6 +173,13 @@ input[type="checkbox"]:checked {
     background-color: red;;
 }
 
+.blog-para {
+    display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3;
+   overflow: hidden;
+}
+
 @media screen and (max-width: 768px) {
     .dashboard-content {
         margin: auto;

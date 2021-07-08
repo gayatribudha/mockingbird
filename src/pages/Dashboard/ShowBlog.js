@@ -1,12 +1,41 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import '../../assets/css/dashboard.css';
 
 
 export default function ShowBlog() {
+
+    const id = useParams();
+    // console.log(id.blogId)
+    // console.log(`blogs/${id.blogId} `);
+
+    const [blog, setBlog] = useState({});
+    const [hasError, setErrors] = useState(false);
+
+    useEffect(() => {
+        async function fetchData() {
+            const res = await fetch(`/blogs/${id.blogId}`);
+            res.json()
+                .then(res => setBlog(res))
+                .catch(err => setErrors(err));
+        }
+        fetchData();
+    }, []);
+
+    function handleDelete() {
+        console.log("clicked");
+        console.log(id.blogId);
+        fetch(`/blogs/${id.blogId}/delete`, {
+            method: 'DELETE',
+        })
+            .then(res => res.json())
+            .then(res => console.log(res))
+    }
+
     return (
         <div className="dashboard">
+
             <div className="row px-3 px-md-5 px-lg-5 pt-lg-5">
                 <div className="col-sm-12 col-md-5 col-lg-5 pt-5 pt-md-5 pt-lg-0">
                     <Link to="/dashboard/blog">
@@ -18,40 +47,43 @@ export default function ShowBlog() {
                 </div>
                 <div className="col-sm-12 col-md-7 col-lg-7 pt-5 pt-md-5 pt-lg-0 d-none d-sm-none d-md-block d-lg-block">
                     <div className="mt-5 mt-md-0 mt-lg-0 float-right">
-                        <button className="delete-btn">Update</button>
-
-                        <button className="ml-2 delete-btn">Delete</button>
-
+                        <Link to={`/dashboard/update-blog/${blog._id}`}>
+                            <button className="delete-btn">Update</button>
+                        </Link>
+                        <Link to={'/dashboard/blog'}>
+                        <button type='submit' className="ml-2 delete-btn" onClick={handleDelete}>Delete</button>
+                        </Link>
                     </div>
                 </div>
             </div>
             <div className="row px-3 px-md-5 px-lg-5 mt-2 mt-md-4 mt-lg-4">
                 <div className="col m-2 p-3 mb-2" style={{ backgroundColor: "white" }}>
-                    <h3 className="blog-title text-center mt-2 ">Inside the city of glass and stell.</h3>
-                    <div className="" style={{height: "380px", overflowY:"scroll"}}>
-                        <p className="m-3">Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu. Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <h3 className="blog-title text-center mt-2 ">
+                        {/* {props.location.blogDetail.title} */}
+                        {blog.title}
 
-                        Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu.Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu.
-                        <br />
-                    Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu. Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu.Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu. Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu.Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu. Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu.Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu. Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu.Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </h3>
+                    <div className="" style={{ height: "380px", overflowY: "scroll" }}>
+                        <p className="m-3">
+                            {/* {props.location.blogDetail.description} */}
+                            <div dangerouslySetInnerHTML={{ __html: blog.description }}></div>
                         </p>
                     </div>
                 </div>
             </div>
-            <div className="row my-2 mx-5 pb-5  d-block d-md-block d-lg-none">
+            {/* For mobile view */}
+            <div className="row my-2 mx-5 pb-5  d-block d-md-none d-lg-none">
                 <div className="col ">
-                    <button className="delete-btn">Update</button>
-                    <button className="ml-2 delete-btn">Delete</button>
-
+                    <Link to={`/dashboard/update-blog/${blog._id}`}>
+                        <button className="delete-btn">Update</button>
+                    </Link>
+                    <Link to={'/dashboard/blog'}>
+                        <button type="submit" className="ml-2 delete-btn">Delete</button>
+                    </Link>
                 </div>
             </div>
         </div>
     )
+
 }
+
