@@ -169,16 +169,64 @@ input[type="file"] {
     font-size: 15px;
 }
 
-input[type="checkbox"]:checked {
-    background-color: red;;
-}
 
 .blog-para {
     display: -webkit-box;
-   -webkit-box-orient: vertical;
-   -webkit-line-clamp: 3;
-   overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
+
+/* pagination start */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paginationItem {
+    background: #fff;
+    border: 1px solid #ba14bd;
+    padding: 10px;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    position: relative;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.paginationItem span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15px;
+}
+
+.prev,
+.next {
+    background: #fff;
+    border: none;
+    color: grey;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.paginationItem.active {
+    border: 1px solid #f092f1;
+    color: #888;
+    pointer-events: none;
+}
+
+.prev.disabled,
+.next.disabled {
+    pointer-events: none;
+    box-shadow: none;
+    color: #999;
+}
+/* pagination ends */
 
 @media screen and (max-width: 768px) {
     .dashboard-content {
