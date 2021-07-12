@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link, useParams } from "react-router-dom";
+import swal from 'sweetalert';
+import { useHistory } from 'react-router';
 
 
 import { Editor } from '@tinymce/tinymce-react';
@@ -23,6 +25,9 @@ export default function CreateBlog() {
     const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
 
+    const routerHistory = useHistory();
+
+
     // get detail of single blog 
     useEffect(() => {
         async function fetchData() {
@@ -30,7 +35,8 @@ export default function CreateBlog() {
             res.json()
                 .then(res => (setAuthor(res.author),   // here res is the object of blog detail that contains id, title, author, description
                     setTitle(res.title), // setTitle call setTitle method in above hook and set the value of title to value in res.title
-                    setDescription(res.description)))
+                    setDescription(res.description))
+                )
                 .catch(err => setErrors(err));
         }
         fetchData();
@@ -57,7 +63,13 @@ export default function CreateBlog() {
         };
         fetch(`/blogs/${id.blogId}/update`, requestOptions)
             .then(response => response.json())
-            .then(res => console.log(res));
+            .then(res => swal({
+                title: "Updated!!",
+                text: "Your blog is updated successfully!",
+                icon: "success",
+            }).then(function () {
+                routerHistory.push(`/dashboard/blog/${id.blogId}`);
+            }));
     };
 
 

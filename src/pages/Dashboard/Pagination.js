@@ -38,7 +38,7 @@ export default function Pagination({ data, RenderComponent, pageLimit, dataLimit
                     <RenderComponent key={idx} data={d} />
                 ))}
             </div>
-            <div className="pagination mt-4 pr-md-5 pr-lg-5">
+            <div className="pagination mt-4 pb-5 ">
                 {/* previous button */}
                 <button
                     onClick={goToPreviousPage}
@@ -61,7 +61,7 @@ export default function Pagination({ data, RenderComponent, pageLimit, dataLimit
                 {/* next button */}
                 <button
                     onClick={goToNextPage}
-                    className={`next ${currentPage === pages ? 'disabled' : ''}`}
+                    className={`next ${currentPage > pages ? 'disabled' : ''}`}
                 >
                     next
         </button>

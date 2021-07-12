@@ -19,6 +19,7 @@ export default function DashBlog() {
             })
             .then((blogs) => setBlogs(blogs))
             .catch((error) => setError(error.message));
+            console.log(blogs);
     }, []);
 
     if (error) return <h1>{error}</h1>;

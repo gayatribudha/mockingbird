@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import swal from 'sweetalert';
+import Swal from 'sweetalert2'
+import { useHistory } from 'react-router';
 
 import '../../assets/css/dashboard.css';
 
@@ -12,6 +15,9 @@ export default function ShowBlog() {
 
     const [blog, setBlog] = useState({});
     const [hasError, setErrors] = useState(false);
+
+    const routerHistory = useHistory();
+
 
     useEffect(() => {
         async function fetchData() {
@@ -30,7 +36,36 @@ export default function ShowBlog() {
             method: 'DELETE',
         })
             .then(res => res.json())
-            .then(res => console.log(res))
+            .then(res => swal({
+                text: "Your blog is successfully deleted.",
+                icon: "success",
+                button: "Ok"
+            }).then(function () {
+                routerHistory.push(`/dashboard/blog`);
+                window.location.reload();
+            }))
+    }
+
+    function confirmDelete() {
+        Swal.fire({
+            text: "Are you sure you want to delete this blog?",
+            icon: "warning",
+            showDenyButton: true,
+            confirmButtonText: `Yes`,
+            denyButtonText: `No`,
+            confirmButtonColor: '#ba14bd',
+            denyButtonColor: 'grey',
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleDelete();
+            } else {
+                routerHistory.push(`/dashboard/blog/${id.blogId}`);
+            }
+        })
     }
 
     return (
@@ -51,7 +86,7 @@ export default function ShowBlog() {
                             <button className="delete-btn">Update</button>
                         </Link>
                         <Link to={'/dashboard/blog'}>
-                        <button type='submit' className="ml-2 delete-btn" onClick={handleDelete}>Delete</button>
+                            <button type='submit' className="ml-2 delete-btn" onClick={confirmDelete}>Delete</button>
                         </Link>
                     </div>
                 </div>
@@ -78,7 +113,7 @@ export default function ShowBlog() {
                         <button className="delete-btn">Update</button>
                     </Link>
                     <Link to={'/dashboard/blog'}>
-                        <button type="submit" className="ml-2 delete-btn">Delete</button>
+                        <button type="submit" className="ml-2 delete-btn" onClick={confirmDelete}>Delete</button>
                     </Link>
                 </div>
             </div>
