@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 //importing blog routes
 const blog = require('./routes/blog_route');
 const story = require('./routes/story_route');
+const user = require('./routes/user_route');
+
 
 
 //creating an express app
@@ -21,6 +23,8 @@ app.use(express.urlencoded({ extended: false }));
 //route for blog routes
 app.use('/blogs', blog);
 app.use('/stories', story);
+app.use('/', user);
+
 
 
 // Database Connection
