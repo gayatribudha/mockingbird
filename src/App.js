@@ -7,6 +7,8 @@ import Story from './pages/Story';
 import BeAPart from './pages/BeAPart';
 import SingleStory from './pages/SingleStory';
 import SingleBlog from './pages/SingleBlog';
+import Register from './pages/Register';
+
 
 import Dashboard from './pages/Dashboard/Dashboard';
 import DashProfile from './pages/Dashboard/DashProfile';
@@ -62,6 +64,8 @@ function App() {
         <WebsiteRoute exact path="/story" component={Story}></WebsiteRoute>
         <WebsiteRoute exact path="/blog" component={Blog}></WebsiteRoute>
         <WebsiteRoute exact path="/beapart" component={BeAPart}></WebsiteRoute>
+        <WebsiteRoute exact path="/register" component={Register}></WebsiteRoute>
+
         <WebsiteRoute exact path="/story/title" component={SingleStory}></WebsiteRoute>
         <WebsiteRoute exact path="/blog/title" component={SingleBlog}></WebsiteRoute>
 

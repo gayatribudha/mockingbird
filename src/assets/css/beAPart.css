@@ -28,19 +28,20 @@
     border-radius: 20px;
     border: 1px solid #e5e5e5;
     box-shadow: 0px 4px 4px #acacac;
-    padding: 5px;
+    padding: 5px 25px;
     font-size: 15px;
     width: 270px;
     letter-spacing: 1.9px;
+    color: rgb(83, 83, 83);
+
 }
 
 .login-input:hover {
     border: 1px solid #ba14bd;
-
 }
 
 .login-input:focus {
-    border: 1px solid #ba14bd;
+    border: 1px solid #ba14bd !important;
 }
 
 .login-button {
@@ -75,3 +76,9 @@
     border: 0px;
     background-color: white;
 }
+
+.error {
+    font-size: 12px;
+    color: red;
+}
+
