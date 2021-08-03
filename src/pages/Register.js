@@ -34,7 +34,7 @@ export default function Register() {
     const handleSubmit = e => {
         e.preventDefault();
         const data = { fullname, username, email, password };
-        if (data.fullname === "" || data.fullname.length != 3) {
+        if (data.fullname === "" || data.fullname.length < 3) {
             setErrorFullname(true);
 
             setErrorUsername(false);
@@ -43,7 +43,7 @@ export default function Register() {
 
             setPasswordMatch(true);
 
-        } else if (data.username === "" || data.username.length != 3) {
+        } else if (data.username === "" || data.username.length < 3) {
             setErrorUsername(true);
 
             setErrorFullname(false);
@@ -61,7 +61,7 @@ export default function Register() {
 
             setPasswordMatch(true);
 
-        } else if (data.password === "" || data.password.length != 8) {
+        } else if (data.password === "" || data.password.length < 8) {
             setErrorPassword(true);
 
             setErrorFullname(false);

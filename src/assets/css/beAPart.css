@@ -33,7 +33,6 @@
     width: 270px;
     letter-spacing: 1.9px;
     color: rgb(83, 83, 83);
-
 }
 
 .login-input:hover {
@@ -82,3 +81,14 @@
     color: red;
 }
 
+@media screen and (max-width: 768px) {
+    .login-input {
+        width: 25   0px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .login-input {
+        width: 200px;
+    }
+}

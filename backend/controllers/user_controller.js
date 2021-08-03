@@ -61,9 +61,38 @@ exports.login = function (req, res) {
                     res.json({ success: true, token: 'Bearer ' + token });
                 });
             } else {
-                errors.password = 'Password Incorrect';
+                errors.password = 'Password Incorrect'; 
                 return res.status(402).json(errors);
             }
         });
     }).catch(); //error of find one
 };
+
+
+const checkToken = (req, res, next) => {
+    const header = req.headers.authorization;
+    console.log(header)
+
+    if (typeof header !== 'undefined') {
+        const bearer = header.split(' ');
+        const token = bearer[1];
+        console.log(token)
+        req.token = token;
+        next();
+    } else {
+        //If header is undefined return Forbidden (403)
+        console.log("shit")
+        res.sendStatus(403)
+    }
+}
+
+
+exports.auth = (checkToken, (req, res, next) => {
+    jwt.verify(req.token, keys.secret, (err) => {
+        if (err) {
+            res.sendStatus(403);
+            console.log("shit")
+        }
+        else res.json({ 'ok': 'ok' });
+    });
+});
