@@ -1,38 +1,46 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../assets/css/dashboard.css';
 import birdIcon from '../../assets/images/birdIcon.png';
 import { useHistory } from 'react-router';
-import axios from "axios";;
+import axios from "axios";
+// import WebSideBar from '../../components/SideBar/WebSideBar';
 
 
 export default function Dashboard() {
 
-    const routerHistory = useHistory();
+    
+    // const routerHistory = useHistory();
 
-    useEffect(() => {
-        console.log(localStorage.getItem("user"));
-        if (localStorage.getItem("user") === null) {
-            routerHistory.push('/beapart');
-        }
-        // else {
-        //     // axios.defaults.headers.common = {
-        //     //     'Authorization': localStorage.getItem("user")
-        //     // }
-        //     axios({
-        //             url: "/auth",
-        //             method: 'post',
-        //             headers: {
-        //                 Authorization: localStorage.getItem("user"),
-        //             }
-        //          })
-        //         .then(usr => {
-        //             routerHistory.push('/dashboard');
-        //         })
-        //         .catch(err => {
-        //             routerHistory.push('/beapart');
-        //         });
-        // }
-    }, []);
+    // console.log(localStorage.getItem('user'));
+    // useEffect(() => {
+    //     let JWTToken = localStorage.getItem('user');
+    //     dashboard();
+    //     async function dashboard() {
+    //         try {
+    //             let res = await axios.get('/dashboard', { headers: { "Authorization": `Bearer ${JWTToken}` } });
+    //         }
+    //         catch (error) {
+    //             console.log(error);
+    //             routerHistory.push('/beapart');
+    //         }
+    //     }
+    // }, []);
+
+    // using fetch method
+    // fetch('/dashboard')
+    //     .then((response) => {
+    //         if (response.status == 200) {
+    //             routerHistory.push('/dashboard');
+    //         } else if (response.status == 401) {
+    //             routerHistory.push('/beapart');
+    //         } else {
+    //             routerHistory.push('/beapart');
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         routerHistory.push('/beapart');
+    //     });
+
 
     return (
         <div className="dashboard">
@@ -43,6 +51,7 @@ export default function Dashboard() {
                 <img className="mt-5" src={birdIcon} alt="bird-icon" />
 
             </div>
+
         </div>
 
     )

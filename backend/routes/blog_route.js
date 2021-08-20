@@ -3,9 +3,12 @@ const router = express.Router();
 
 // importing controller for blog
 const blog_controller = require('../controllers/blog_controller');
+const user_controller = require('../controllers/user_controller');
+
 
 // create routes
-router.get('/', blog_controller.list_blogs);
+
+router.get('/',user_controller.loginRequired, blog_controller.list_blogs);
 
 router.post('/create-blog', blog_controller.createBlog); //create blog
 

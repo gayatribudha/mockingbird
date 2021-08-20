@@ -4,7 +4,7 @@ const Blog = require('../models/blog_model');
 // list all blogs
 exports.list_blogs = function (req, res) {
 
-    Blog.find().select('-__v').then(blogs => {
+    Blog.find(req.user.email).select('-__v').then(blogs => {
         res.status(200).json(blogs);
     }).catch(error => {
         // log on console
@@ -57,11 +57,11 @@ exports.blog_detail = function (req, res) {
 
 //find blog and update it
 exports.blog_update = function (req, res) {
-    
+
     Blog.findByIdAndUpdate(
         req.params.id,
         { $set: req.body },
-        {new: true}
+        { new: true }
     ).select('-__v')
         .then(blog => {
             if (!blog) {

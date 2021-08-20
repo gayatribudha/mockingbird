@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom';
 import { useHistory } from 'react-router'
 
-
+import user from '../../pages/Dashboard/Dashboard';
 import logo from '../../assets/images/logo.png';
 import pp from '../../assets/images/pp.jpg';
 import birdIcon from '../../assets/images/birdIcon.png';
@@ -19,7 +19,8 @@ $(document).ready(function () {
 });
 
 
-export default function WebSideBar() {
+
+export default function WebSideBar({ userInfo }) {
 
     const routerHistory = useHistory();
 
@@ -33,8 +34,8 @@ export default function WebSideBar() {
 
                     <div className="mt-2 text-center">
                         <img className="user_photo rounded-circle" src={pp} alt="profile" />
-                        <p className="sb-user-name mt-1 mb-0 text-center">Rita Ora</p>
-                        <p className="sb-user-email" >ritaora@gmail.com</p>
+                        <p className="sb-user-name mt-1 mb-0 text-center"> {userInfo.fullname} </p>
+                        <p className="sb-user-email" >{userInfo.email}</p>
                         <hr className="sb-hr-line" />
                     </div>
                     <ul className="sidebar-nav-items">
@@ -168,12 +169,15 @@ export default function WebSideBar() {
                         </li>
                         <li className="sidebar-nav-item">
 
-                            <NavLink activeClassName="sidebar-menu_active" className="sidebar-nav-link" to="/dashboard/logout">
+                            <Link onClick={() => {
+                                localStorage.removeItem("user");
+                                routerHistory.push('/beapart');
+                            }} activeClassName="sidebar-menu_active" className="sidebar-nav-link">
                                 <svg className="icon mr-3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17 8L15.59 9.41L17.17 11H9V13H17.17L15.59 14.58L17 16L21 12L17 8ZM5 5H12V3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H12V19H5V5Z" fill="#4A4A4A" />
                                 </svg>
                                 Logout
-                                </NavLink>
+                                </Link>
                         </li>
                     </ul>
                     <hr className="sb-hr-line" />

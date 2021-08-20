@@ -13,11 +13,14 @@ export default function BeAPart() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const [requestUserInfo, setRequestUserInfo] = useState("");
+
     const [errorEmail, setErrorEmail] = useState(false);
     const [errorPassword, setErrorPassword] = useState(false);
 
     const onEmailChange = e => setEmail(e.target.value);
     const onPasswordChange = e => setPassword(e.target.value);
+
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -26,12 +29,15 @@ export default function BeAPart() {
 
         axios.post("/login", { email, password })
             .then(response => {
-                localStorage.setItem("user", response.data.token);
+                localStorage.setItem('user', response.data.token);
                 routerHistory.push('/dashboard');
+                // requestUserInfo();
             })
             .catch(err => {
+                console.log(err);
+
                 if (err.response.status == 401) {
-                    setErrorEmail(true);
+                    setErrorPassword(true);
                 } else {
                     setErrorPassword(true);
                 }
@@ -58,7 +64,7 @@ export default function BeAPart() {
                             <div className="error ml-3 mt-2 " style={{ display: errorEmail ? "block" : "none" }} >Wrong email.</div>
 
                             <input type="password" className="login-input mt-3" placeholder="Password" value={password} onChange={onPasswordChange} /><br />
-                            <div className="error ml-3 mt-2 " style={{ display: errorPassword ? "block" : "none" }}>Wrong password.</div>
+                            <div className="error ml-3 mt-2 " style={{ display: errorPassword ? "block" : "none" }}>Wrong Email or Password.</div>
 
                             <button className="login-button mt-4" type="submit">LOGIN</button>
                         </form>

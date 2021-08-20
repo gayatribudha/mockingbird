@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from 'react'
+import axios from "axios";
+import { useHistory } from 'react-router';
 import NavigationBar from './components/NavigationBar/NavigationBar';
 import WebSideBar from './components/SideBar/WebSideBar';
 
@@ -32,7 +35,9 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
 
 
+
 export const WebsiteRoute = ({ component: Component, ...rest }) => {
+
   return (
     <Route {...rest} component={(props) => (
       <div>
@@ -43,11 +48,54 @@ export const WebsiteRoute = ({ component: Component, ...rest }) => {
     />
   )
 }
-export const DashboardRoute = ({ component: Component, ...rest }) => {
+export function DashboardRoute({ component: Component, ...rest }) {
+
+  const routerHistory = useHistory();
+  const [userInfo, setUserInfo] = useState([]);
+
+  useEffect(() => {
+    let JWTToken = localStorage.getItem('user');
+    dashboard();
+    async function dashboard() {
+      try {
+        let res = await axios.get('/dashboard', { headers: { "Authorization": `Bearer ${JWTToken}` } });
+        setUserInfo(res.data.user);
+        console.log(userInfo);
+      }
+      catch (error) {
+        console.log(error);
+        routerHistory.push('/beapart');
+      }
+    }
+  }, []);
+
+  // window.localStorage.addEventListener('storage', () => {
+  //   alert('session storage variable value changed');
+  // });
+
+  function requestUserInfo() {
+    console.log("helllllllllllllllllllll nooooooooooooooooooooo");
+
+    let JWTToken = localStorage.getItem('user');
+    dashboard();
+    async function dashboard() {
+      try {
+        let res = await axios.get('/dashboard', { headers: { "Authorization": `Bearer ${JWTToken}` } });
+        setUserInfo(res.data.user);
+        console.log(userInfo);
+      }
+      catch (error) {
+        console.log(error);
+        routerHistory.push('/beapart');
+      }
+    }
+  }
+
+
   return (
     <Route {...rest} component={(props) => (
       <div>
-        <WebSideBar />
+        <WebSideBar userInfo={userInfo} />
         <Component {...props} />
       </div>
     )}
@@ -57,6 +105,7 @@ export const DashboardRoute = ({ component: Component, ...rest }) => {
 
 
 function App() {
+
   return (
     <div className="App">
       <Router>
@@ -69,7 +118,7 @@ function App() {
         <WebsiteRoute exact path="/story/title" component={SingleStory}></WebsiteRoute>
         <WebsiteRoute exact path="/blog/title" component={SingleBlog}></WebsiteRoute>
 
-        <DashboardRoute exact path="/dashboard" component={Dashboard}></DashboardRoute>
+        <DashboardRoute exact path="/dashboard" component={Dashboard} ></DashboardRoute>
         <DashboardRoute exact path="/dashboard/blog" component={DashBlog}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/profile" component={DashProfile}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/blog/:blogId" component={ShowBlog}></DashboardRoute>

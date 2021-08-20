@@ -1,8 +1,10 @@
+require('dotenv').config();
 const User = require('../models/user_model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../config');
-const validator = require('validator')
+const validator = require('validator');
+
 
 // list all stored stories
 exports.register = function (req, res) {
@@ -27,72 +29,57 @@ exports.register = function (req, res) {
                 password: req.body.password,
             })
 
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(newUser.password, salt, (err, hash) => {
-                    if (err) throw err;
-                    newUser.password = hash;
-
-                    newUser
-                        .save()
-                        .then(user => res.json(user))
-                        .catch(err => console.log(err));
-                });
+            newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
+            newUser.save((err, user) => {
+                if (err) {
+                    res.status(500).send({ message: err });
+                }
+                user.hash_password = undefined;
+                res.status(201).json(user);
             });
+
+            // bcrypt.genSalt(10, (err, salt) => {
+            //     bcrypt.hash(newUser.password, salt, (err, hash) => {
+            //         if (err) throw err;
+            //         newUser.password = hash;
+
+            //         newUser
+            //             .save()
+            //             .then(user => res.json(user))
+            //             .catch(err => console.log(err));
+            //     });
+            // });
         }
     })
 };
 
 exports.login = function (req, res) {
-    const errors = {};
-    const email = req.body.email;
-    const password = req.body.password;
-    User.findOne({ email }).then((user) => {
+    User.findOne({
+        email: req.body.email
+    }, (err, user) => {
+        if (err) throw err;
         if (!user) {
-            errors.email = 'User not found';
-            return res.status(401).json(errors);
-        }
-
-        bcrypt.compare(password, user.password).then((isMatch) => {
-            if (isMatch) {
-                //Credentials matched
-                payload = { id: user.id, username: user.username, email: user.email };
-
-                jwt.sign(payload, keys.secret, { expiresIn: 36000 * 100 }, (err, token) => {
-                    res.json({ success: true, token: 'Bearer ' + token });
-                });
+            res.status(401).json({ message: 'Authentication failed. User not found.' });
+        } else if (user) {
+            if (!user.comparePassword(req.body.password)) {
+                res.status(401).json({ message: 'Authentication failed. Wrong password.' });
             } else {
-                errors.password = 'Password Incorrect'; 
-                return res.status(402).json(errors);
+                res.json({
+                    token: jwt.sign({ email: user.email, fullname: user.fullname, _id: user._id }, process.env.JWTPASSWORD)
+                });
             }
-        });
-    }).catch(); //error of find one
+        }
+    });
 };
 
-
-const checkToken = (req, res, next) => {
-    const header = req.headers.authorization;
-    console.log(header)
-
-    if (typeof header !== 'undefined') {
-        const bearer = header.split(' ');
-        const token = bearer[1];
-        console.log(token)
-        req.token = token;
-        next();
-    } else {
-        //If header is undefined return Forbidden (403)
-        console.log("shit")
-        res.sendStatus(403)
-    }
+exports.dashboard = (req, res) => {
+    console.log("Deshboarddddddddddddddd");
 }
 
-
-exports.auth = (checkToken, (req, res, next) => {
-    jwt.verify(req.token, keys.secret, (err) => {
-        if (err) {
-            res.sendStatus(403);
-            console.log("shit")
-        }
-        else res.json({ 'ok': 'ok' });
-    });
-});
+exports.loginRequired = (req, res, next) => {
+    if (req.user) {
+        res.json({ message: 'Authorized User, Action Successful!', user: req.user });
+    } else {
+        res.status(401).json({ message: 'Unauthorized user!' });
+    }
+};

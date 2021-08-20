@@ -23,6 +23,7 @@ export default function Register() {
     const [errorUsername, setErrorUsername] = useState(false)
     const [errorEmail, setErrorEmail] = useState(false)
     const [errorPassword, setErrorPassword] = useState(false)
+    const [errorEmailExist, setErrorEmailExist] = useState(false)
 
     const onFullnameChange = e => setFullname(e.target.value);
     const onUsernameChange = e => setUsername(e.target.value);
@@ -40,6 +41,7 @@ export default function Register() {
             setErrorUsername(false);
             setErrorEmail(false);
             setErrorPassword(false);
+            setErrorEmailExist(false);
 
             setPasswordMatch(true);
 
@@ -49,6 +51,8 @@ export default function Register() {
             setErrorFullname(false);
             setErrorEmail(false);
             setErrorPassword(false);
+            setErrorEmailExist(false);
+
 
             setPasswordMatch(true);
 
@@ -58,6 +62,7 @@ export default function Register() {
             setErrorFullname(false);
             setErrorUsername(false);
             setErrorPassword(false);
+            setErrorEmailExist(false);
 
             setPasswordMatch(true);
 
@@ -67,6 +72,7 @@ export default function Register() {
             setErrorFullname(false);
             setErrorUsername(false);
             setErrorEmail(false);
+            setErrorEmailExist(false);
 
             setPasswordMatch(true);
 
@@ -77,12 +83,15 @@ export default function Register() {
             setErrorFullname(false);
             setErrorUsername(false);
             setErrorEmail(false);
+            setErrorEmailExist(false);
 
         } else {
             setErrorPassword(false);
             setErrorFullname(false);
             setErrorUsername(false);
             setErrorEmail(false);
+            setErrorEmailExist(false);
+
             setPasswordMatch(true)
             const requestOptions = {
                 method: "POST",
@@ -90,16 +99,22 @@ export default function Register() {
                 body: JSON.stringify(data)
             };
             fetch("/register", requestOptions)
-                .then(response => response.json())
-                .then(res => swal({
-                    title: "Registered!!",
-                    text: "Thank you for joining Mockingbird.",
-                    icon: "success",
-                }).then(function () {
-                    routerHistory.push('/beapart');
-                }))
+                .then(response => {
+                    if (response.ok) {
+                        swal({
+                            title: "Registered!!",
+                            text: "Thank you for joining Mockingbird.",
+                            icon: "success"
+                        });
+                        routerHistory.push('/beapart');
+                    } else {
+                        
+                        throw new Error(setErrorEmailExist(true));
+                    }
+                })
                 .catch(err => {
-                    swal("Oops!", "Seems like there is some error.", "error");
+                    console.log(err)
+                    
                 });
         }
     };
@@ -127,6 +142,7 @@ export default function Register() {
 
                             <input type="email" className="login-input mt-3" placeholder="Email" value={email} onChange={onEmailChange} /><br />
                             <div className="error ml-3 mt-2 " style={{ display: errorEmail ? "block" : "none" }}>Email is required.</div>
+                            <div className="error ml-3 mt-2 " style={{ display: errorEmailExist ? "block" : "none" }}>Email already exists.</div>
 
                             <input type="password" className="login-input mt-3" placeholder="Password" value={password} onChange={onPasswordChange} /><br />
                             <div className="error ml-3 mt-2 " style={{ display: errorPassword ? "block" : "none" }}>Password is required with at least of 8 digit.</div>
