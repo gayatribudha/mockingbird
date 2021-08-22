@@ -8,7 +8,7 @@ const user_controller = require('../controllers/user_controller');
 
 // create routes
 
-router.get('/',user_controller.loginRequired, blog_controller.list_blogs);
+router.get('/',blog_controller.list_blogs);
 
 router.post('/create-blog', blog_controller.createBlog); //create blog
 

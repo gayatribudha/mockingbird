@@ -243,6 +243,11 @@ input[type="file"] {
     background-color: #ba14bd;
 }
 
+.blogs-box {
+    height: 400px;
+    width: 60%;
+}
+
 @media screen and (max-width: 768px) {
     .dashboard-content {
         margin: auto;
@@ -280,6 +285,10 @@ input[type="file"] {
 
     #profile-content {
         padding: 10px;
+    }
+    .blogs-box {
+        height: 100%;
+        width: 100%;
     }
     
 }

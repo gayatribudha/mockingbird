@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination';
 import Blog from './Blog';
+import axios from "axios";
+import { useHistory } from 'react-router';
 
 
 
@@ -11,18 +13,39 @@ export default function DashBlog() {
     const [error, setError] = useState(null);
     const [blogs, setBlogs] = useState([]);
 
-    useEffect(() => {
-        fetch('/blogs')
-            .then((response) => {
-                if (response.ok) return response.json();
-                throw new Error('something went wrong while requesting posts');
-            })
-            .then((blogs) => setBlogs(blogs))
-            .catch((error) => setError(error.message));
-            console.log(blogs);
-    }, []);
+    const routerHistory = useHistory();
+    const [userInfo, setUserInfo] = useState([]);
 
-    if (error) return <h1>{error}</h1>;
+    // useEffect(() => {
+    //     fetch('/blogs')
+    //         .then((response) => {
+    //             if (response.ok) return response.json();
+    //             throw new Error('something went wrong while requesting posts');
+    //         })
+    //         .then((blogs) => setBlogs(blogs))
+    //         .catch((error) => setError(error.message));
+    //         console.log(blogs);
+    // }, []);
+
+    // if (error) return <h6>{error}</h6>;
+
+    useEffect(() => {
+        let JWTToken = localStorage.getItem('user');
+        dashboard();
+        async function dashboard() {
+            try {
+                let res = await axios.get('/blogs', { headers: { "Authorization": `Bearer ${JWTToken}` } });
+                setBlogs(res.data);
+                // console.log(res.data.userInfo);
+                // setUserInfo(res.data.user);
+                // console.log(userInfo);
+            }
+            catch (error) {
+                console.log(error);
+                routerHistory.push('/beapart');
+            }
+        }
+    }, []);
 
     return (
         <div className="dashboard">
@@ -44,35 +67,35 @@ export default function DashBlog() {
                     </div>
                 </div>
             </div>
-            <div className="row px-4 px-md-5 px-lg-5  mt-4 mt-md-4 mt-lg-4">
+            <div className="row px-4 px-md-5 px-lg-5  mt-4 mt-md-4 mt-lg-4 overflow-auto blogs-box">
 
-                {/* {blogs.map(blog => (
-                        <div key={blog._id} className="col-sm-12 col-md-5 col-lg-5 ml-md-4 ml-lg-4  mt-3 d-blog-card">
-                            <Link activeClassName="sidebar-menu_active" to={`/dashboard/blog/${blog._id}`} style={{ textDecoration: "none" }}>
-                                <div className="pt-3">
-                                    <h3 className="blog-title">{blog.title}</h3>
-                                    <p className="blog-para"><div dangerouslySetInnerHTML={{ __html: blog.description }}></div></p>
-                                </div>
-                            </Link>
-                            <form>
-                                <p >Publish <input className="publish-checkbox" type="checkbox" name="publish" /></p>
-                            </form>
-                        </div>
-                    ))} */}
+                {blogs.map(blog => (
+                    <div key={blog._id} className="col-sm-12 col-md-5 col-lg-5 ml-md-4 ml-lg-4  mt-3 d-blog-card">
+                        <Link activeClassName="sidebar-menu_active" to={`/dashboard/blog/${blog._id}`} style={{ textDecoration: "none" }}>
+                            <div className="pt-3">
+                                <h3 className="blog-title">{blog.title}</h3>
+                                <p className="blog-para"><div dangerouslySetInnerHTML={{ __html: blog.description }}></div></p>
+                            </div>
+                        </Link>
+                        <form>
+                            <p >Publish <input className="publish-checkbox" type="checkbox" name="publish" /></p>
+                        </form>
+                    </div>
+                ))}
 
-                    {blogs.length > 0 ? (
-                        <>
-                            <Pagination
-                                data={blogs}
-                                RenderComponent={Blog}
-                                title="Blogs"
-                                pageLimit={3}
-                                dataLimit={4}
-                            />
-                        </>
-                    ) : (
-                        <h1>No Posts to display</h1>
-                    )}
+                {/* {blogs.length > 0 ? (
+                    <>
+                        <Pagination
+                            data={blogs}
+                            RenderComponent={Blog}
+                            title="Blogs"
+                            pageLimit={3}
+                            dataLimit={4}
+                        />
+                    </>
+                ) : (
+                    <h1>No Posts to display</h1>
+                )} */}
 
             </div>
         </div>
