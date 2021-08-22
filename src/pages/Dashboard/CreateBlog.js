@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import swal from 'sweetalert';
@@ -6,19 +6,22 @@ import { useHistory } from 'react-router'
 import { Editor } from '@tinymce/tinymce-react';
 
 import '../../assets/css/dashboard.css';
+import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom';
 
 const regularExpression = RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
 
 
-export default function CreateBlog() {
+export default function CreateBlog(userInfo) {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [author, setAuthor] = useState("");
+    const [userId, setUserId] = useState("");
 
-    // for form validation
 
-
+    useEffect(() => {
+        setUserId(userInfo.userInfo._id);
+    })
 
     const onTitleChange = e => setTitle(e.target.value);
     const onDescriptionChange = (content, editor) => {
@@ -32,7 +35,7 @@ export default function CreateBlog() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const data = { title, description, author };
+        const data = { title, description, author, userId };
         if (data.description === "") {
             data.description = "Blog Yet to write.";
         }
@@ -71,10 +74,10 @@ export default function CreateBlog() {
                             <br />
 
 
-
-
                             <label className="form-label">Author</label><br />
                             <input required className="form-field mt-0" type="text" value={author} onChange={onAuthorChange} required></input><br />
+
+                            <input hidden className="form-field mt-0" type="text" value={userId}></input><br />
 
                             <label className="form-label mt-3">Blog</label> <br />
                             <Editor required

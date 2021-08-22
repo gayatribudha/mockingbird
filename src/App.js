@@ -96,7 +96,7 @@ export function DashboardRoute({ component: Component, ...rest }) {
     <Route {...rest} component={(props) => (
       <div>
         <WebSideBar userInfo={userInfo} />
-        <Component {...props} />
+        <Component userInfo={userInfo} />
       </div>
     )}
     />

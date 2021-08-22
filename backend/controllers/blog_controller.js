@@ -34,8 +34,12 @@ exports.createBlog = function (req, res) {
     const blog = new Blog({
         author: req.body.author,
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
+        userId: req.body.userId
     });
+
+    console.log(blog);
+
 
     blog.save().then(data => {
         res.status(200).json(data);
