@@ -1,10 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import swal from 'sweetalert';
+import { useHistory } from 'react-router'
+import axios from "axios";
+// import { useParams } from "react-router-dom";
 
 import pp from '../../assets/images/pp.jpg';
 import '../../assets/css/dashboard.css';
 
 
-export default function DashProfile() {
+export default function DashProfile(userInfo) {
+    console.log(userInfo.userInfo._id);
+
+    const [user, setUser] = useState("");
+
+    const [fullname, setFullname] = useState("");
+    const [email, setEmail] = useState("");
+    const [bio, setBio] = useState("");
+    const [address, setAddress] = useState("");
+    const [contactNo, setContactNo] = useState("");
+
+    const [hasError, setErrors] = useState(false);
+
+
+    const routerHistory = useHistory();
+
+    useEffect(() => {
+        fetchData();
+        async function fetchData() {
+            const res = await fetch(`/${userInfo.userInfo._id}/userDetail`);
+            res.json()
+                .then(res => (setFullname(res.fullname),   // here res is the object of user detail that contains id, title, author, description
+                    setEmail(res.email), 
+                    setBio(res.bio),
+                    setAddress(res.address),
+                    setContactNo(res.contactNo)),
+                )
+                .catch(err => setErrors(err));
+        }
+    }, [])
+
+    const onFullnameChange = e => setFullname(e.target.value);
+    const onEmailChange = e => setEmail(e.target.value);
+    const onBioChange = e => setBio(e.target.value);
+    const onAddressChange = e => setAddress(e.target.value);
+    const onContactNoChange = e => setContactNo(e.target.value);
+
+    // let JWTToken = localStorage.getItem('user');
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        const data = { fullname, email, bio, address, contactNo };
+
+        const requestOptions = {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        };
+        console.log('inside submitttt')
+
+        fetch(`/${userInfo.userInfo._id}/updateProfile`, requestOptions)
+            .then(response => response.json())
+            .then(res => swal({
+                title: "Saved!!",
+                text: "Your profile is saved successfully!",
+                icon: "success",
+            }).then(function () {
+                routerHistory.push('/dashboard/profile');
+            }))
+            .catch(err => {
+                swal("Oops!", "Seems like we couldn't update your profile", "error");
+            });
+    };
+
     return (
         <div className="dashboard">
             <div className="container" id="">
@@ -12,11 +79,11 @@ export default function DashProfile() {
                     <div className="col pl-5 mx-mt-2 mx-lg-5 px-md-2 px-lg-5 mt-5 mt-md-5 mt-lg-5 pt-md-5 pt-lg-5 d-flex flex-column flex-md-row  flex-lg-row">
                         <img src={pp} alt="profile" style={{ borderRadius: "50px", width: "100px", height: "100px" }} />
                         <div className=" pl-1 ml-md-5 l-lg-5 mt-2 mt-md-4 mt-lg-4">
-                            <p className="p-user-name mb-0 pb-0">Rita Ora</p>
-                            <p className="p-user-email mt-0 pt-0">ritaora@gmail.com< br /></p>
-                            <p className="p-bio">Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qui. Atque quia est corporis ut inventore sint illo</p>
-                            <p className="p-contact">Kathmandu, Nepal <br />
-                            +977 9844874635</p>
+                            <p className="p-user-name mb-0 pb-0">{fullname}</p>
+                            <p className="p-user-email mt-0 pt-0">{email}< br /></p>
+                            <p className="p-bio">{bio}</p>
+                            <p className="p-contact">{address} <br />
+                                {contactNo}</p>
 
                             <button className="delete-btn" data-toggle="modal" data-target="#updateProfile">Update Profile</button>
                             <button className="delete-btn mt-2 mt-md-2 mt-lg-0  ml-md-2 ml-lg-2" data-toggle="modal" data-target="#changePassword">Change Password</button>
@@ -25,7 +92,7 @@ export default function DashProfile() {
                             {/* Update Profile Modal */}
                             <div className="modal fade" id="updateProfile" tabindex="-1" role="dialog" aria-labelledby="updateProfileLabel" aria-hidden="true">
                                 <div className="modal-dialog" role="document">
-                                    <form >
+                                    <form onSubmit={handleSubmit}>
                                         <div className="modal-content">
                                             <div className="modal-header">
                                                 <h5 className="modal-title" id="updateProfileLabel">Update Profile</h5>
@@ -40,7 +107,7 @@ export default function DashProfile() {
                                                             <label className="form-label">Name</label>
                                                         </div>
                                                         <div className=" col-12 col-md-8 col-lg-8">
-                                                            <input type="text" className="profile-update-form" name="name" />
+                                                            <input type="text" className="profile-update-form" name="name" value={fullname} onChange={onFullnameChange} />
                                                         </div>
                                                     </div>
                                                     <div className="row mt-2 mt-md-3 mt-lg-3">
@@ -48,7 +115,7 @@ export default function DashProfile() {
                                                             <label className="form-label">Email</label>
                                                         </div>
                                                         <div className="col-12 col-md-8 col-lg-8">
-                                                            <input type="email" className="profile-update-form" name="email" />
+                                                            <input type="email" className="profile-update-form" name="email" value={email} onChange={onEmailChange} />
                                                         </div>
                                                     </div>
                                                     <div className="row mt-2 mt-md-3 mt-lg-3">
@@ -56,7 +123,7 @@ export default function DashProfile() {
                                                             <label className="form-label">Address</label>
                                                         </div>
                                                         <div className="col-12 col-md-8 col-lg-8">
-                                                            <input type="text" className="profile-update-form" name="address" />
+                                                            <input type="text" className="profile-update-form" name="address" value={address} onChange={onAddressChange} />
                                                         </div>
                                                     </div>
                                                     <div className="row mt-2 mt-md-3 mt-lg-3">
@@ -64,7 +131,7 @@ export default function DashProfile() {
                                                             <label className="form-label">Contact</label>
                                                         </div>
                                                         <div className="col-12 col-md-8 col-lg-8">
-                                                            <input type="text" className="profile-update-form" name="contact" />
+                                                            <input type="text" className="profile-update-form" name="contact" value={contactNo} onChange={onContactNoChange} />
                                                         </div>
                                                     </div>
                                                     <div className="row mt-2 mt-md-3 mt-lg-3">
@@ -72,7 +139,7 @@ export default function DashProfile() {
                                                             <label className="form-label">Bio</label>
                                                         </div>
                                                         <div className="col-12 col-md-8 col-lg-8">
-                                                            <textarea type="text" cols="19" className="profile-update-form" name="bio" ></textarea>
+                                                            <textarea type="text" cols="19" className="profile-update-form" name="bio" value={bio} onChange={onBioChange}></textarea>
                                                         </div>
                                                     </div>
                                                     <div className="row mt-2 mt-md-3 mt-lg-3">
@@ -90,7 +157,7 @@ export default function DashProfile() {
                                                 </div>
                                             </div>
                                             <div className="modal-footer">
-                                                <button type="submit" className="delete-btn" data-dismiss="modal">Update</button>
+                                                <button type="submit" className="delete-btn">Update</button>
                                                 <button type="button" class="delete-btn" data-dismiss="modal">Cancel</button>
                                             </div>
                                         </div>
