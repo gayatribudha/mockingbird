@@ -4,29 +4,17 @@ const Blog = require('../models/blog_model');
 // list all blogs
 exports.list_blogs = function (req, res) {
     console.log("In list blog controller")
-    console.log(req.user);
-    
-    Blog.find().select('-__v').then(blogs => {
-        res.status(200).json(blogs)
-    });
-    // res.status(200).json({
-    //     id: 2,
-    //     title: "Einstein Dreams",
-    //     author: "Alan Lightman"
-    // }).catch(error => {
-    //     console.log(error);
-    // });
-   // Blog.find(req.user.email).select('-__v').then(blogs => {
-    //     res.status(200).json(blogs);
-    // }).catch(error => {
-    //     // log on console
-    //     console.log(error);
+    console.log(req.user._id);
 
-    //     res.status(500).json({
-    //         message: "Error!",
-    //         error: error
-    //     });
-    // });
+    Blog.find({ "userId": req.user._id }).select('-__v').then(blogs => {
+        res.status(200).json(blogs)
+    }).catch(error => {
+        console.log(error);
+        res.status(500).json({
+            message: "Error",
+            error: error
+        })
+    });
 };
 
 //create blog
