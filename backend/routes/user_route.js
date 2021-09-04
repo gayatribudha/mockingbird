@@ -9,7 +9,7 @@ router.post('/login', user_controller.login);
 
 router.get('/dashboard',user_controller.loginRequired, user_controller.dashboard);
 
-router.put('/:id/updateProfile', user_controller.updateProfile);  
+router.put('/:id/updateProfile', user_controller.multerMiddleware, user_controller.updateProfile);    
 
 router.get('/:id/userDetail', user_controller.userDetail);
 

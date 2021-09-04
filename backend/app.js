@@ -10,7 +10,6 @@ const story = require('./routes/story_route');
 const user = require('./routes/user_route');
 
 
-
 //creating an express app
 const app = express();
 
@@ -41,6 +40,9 @@ app.use('/blogs', blog);
 app.use('/stories', story);
 app.use('/', user);
 
+app.use(express.static("./images"));
+
+
 
 // Database Connection
 mongoose.set('useCreateIndex', true);
@@ -49,12 +51,9 @@ mongoose.set('useFindAndModify', false);
 
 mongoose.connection.once('open', function () {
     console.log('Database connected Successfully');
+    app.listen(PORT, () => {
+        console.log(`Server listening on ${PORT}`);
+    });
 }).on('error', function (err) {
     console.log('Error', err);
 })
-
-
-app.listen(PORT, () => {
-    console.log(`Server listening on ${PORT}`);
-});
-

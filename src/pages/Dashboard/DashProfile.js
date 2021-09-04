@@ -11,13 +11,13 @@ import '../../assets/css/dashboard.css';
 export default function DashProfile(userInfo) {
     console.log(userInfo.userInfo._id);
 
-    const [user, setUser] = useState("");
-
     const [fullname, setFullname] = useState("");
     const [email, setEmail] = useState("");
     const [bio, setBio] = useState("");
     const [address, setAddress] = useState("");
     const [contactNo, setContactNo] = useState("");
+    const [photo, setPhoto] = useState("");
+
 
     const [hasError, setErrors] = useState(false);
 
@@ -29,12 +29,15 @@ export default function DashProfile(userInfo) {
         async function fetchData() {
             const res = await fetch(`/${userInfo.userInfo._id}/userDetail`);
             res.json()
-                .then(res => (setFullname(res.fullname),   // here res is the object of user detail that contains id, title, author, description
-                    setEmail(res.email), 
-                    setBio(res.bio),
-                    setAddress(res.address),
-                    setContactNo(res.contactNo)),
-                )
+                .then(res => {
+                    setFullname(res.fullname);   // here res is the object of user detail that contains id, title, author, description
+                    setEmail(res.email);
+                    setBio(res.bio);
+                    setAddress(res.address);
+                    setContactNo(res.contactNo);
+                    setPhoto(res.photo);
+                    console.log(`http://localhost:3001/`+res.photo)
+                })
                 .catch(err => setErrors(err));
         }
     }, [])
@@ -44,32 +47,57 @@ export default function DashProfile(userInfo) {
     const onBioChange = e => setBio(e.target.value);
     const onAddressChange = e => setAddress(e.target.value);
     const onContactNoChange = e => setContactNo(e.target.value);
+    const onPhotoChange = e => setPhoto(e.target.files[0]);
 
     // let JWTToken = localStorage.getItem('user');
 
     const handleSubmit = e => {
         e.preventDefault();
-        const data = { fullname, email, bio, address, contactNo };
+        // const data = { fullname, email, bio, address, contactNo};
 
-        const requestOptions = {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        };
-        console.log('inside submitttt')
+        let formData = new FormData();
+        formData.append('photo', photo);
+        formData.append('fullname', fullname);
+        formData.append('email', email);
+        formData.append('bio', bio);
+        formData.append('address', address);
+        formData.append('contactNo', contactNo);
 
-        fetch(`/${userInfo.userInfo._id}/updateProfile`, requestOptions)
-            .then(response => response.json())
-            .then(res => swal({
-                title: "Saved!!",
-                text: "Your profile is saved successfully!",
-                icon: "success",
-            }).then(function () {
+        // console.log(formData.get('contactNo'));
+        const config = { headers: { 'Content-Type': 'multipart/form-data' } }
+        axios.put(`/${userInfo.userInfo._id}/updateProfile`, formData, config)
+            .then(res => {
+                swal({
+                    title: "Saved!!",
+                    text: "Your profile is saved successfully!",
+                    icon: "success",
+                })
                 routerHistory.push('/dashboard/profile');
-            }))
+            })
             .catch(err => {
+                console.log(err);
                 swal("Oops!", "Seems like we couldn't update your profile", "error");
             });
+
+        // const requestOptions = {
+        //     method: "PUT",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify(data)
+        // };
+        // console.log('inside submitttt')
+
+        // fetch(`/${userInfo.userInfo._id}/updateProfile`, requestOptions)
+        //     .then(response => response.json())
+        //     .then(res => swal({
+        //         title: "Saved!!",
+        //         text: "Your profile is updated successfully!",
+        //         icon: "success",
+        //     }).then(function () {
+        //         routerHistory.push('/dashboard/profile');
+        //     }))
+        //     .catch(err => {
+        //         swal("Oops!", "Seems like we couldn't update your profile", "error");
+        //     });
     };
 
     return (
@@ -77,7 +105,7 @@ export default function DashProfile(userInfo) {
             <div className="container" id="">
                 <div className="row pt-5 pt-md-5 pt-lg-5    ">
                     <div className="col pl-5 mx-mt-2 mx-lg-5 px-md-2 px-lg-5 mt-5 mt-md-5 mt-lg-5 pt-md-5 pt-lg-5 d-flex flex-column flex-md-row  flex-lg-row">
-                        <img src={pp} alt="profile" style={{ borderRadius: "50px", width: "100px", height: "100px" }} />
+                        <img src={`http://localhost:3001/`+photo} alt="profile" style={{ borderRadius: "50px", width: "100px", height: "100px" }} />
                         <div className=" pl-1 ml-md-5 l-lg-5 mt-2 mt-md-4 mt-lg-4">
                             <p className="p-user-name mb-0 pb-0">{fullname}</p>
                             <p className="p-user-email mt-0 pt-0">{email}< br /></p>
@@ -92,7 +120,7 @@ export default function DashProfile(userInfo) {
                             {/* Update Profile Modal */}
                             <div className="modal fade" id="updateProfile" tabindex="-1" role="dialog" aria-labelledby="updateProfileLabel" aria-hidden="true">
                                 <div className="modal-dialog" role="document">
-                                    <form onSubmit={handleSubmit}>
+                                    <form onSubmit={handleSubmit} encType='multipart/form-data'>
                                         <div className="modal-content">
                                             <div className="modal-header">
                                                 <h5 className="modal-title" id="updateProfileLabel">Update Profile</h5>
@@ -107,7 +135,7 @@ export default function DashProfile(userInfo) {
                                                             <label className="form-label">Name</label>
                                                         </div>
                                                         <div className=" col-12 col-md-8 col-lg-8">
-                                                            <input type="text" className="profile-update-form" name="name" value={fullname} onChange={onFullnameChange} />
+                                                            <input type="text" className="profile-update-form" name="fullname" value={fullname} onChange={onFullnameChange} />
                                                         </div>
                                                     </div>
                                                     <div className="row mt-2 mt-md-3 mt-lg-3">
@@ -131,7 +159,7 @@ export default function DashProfile(userInfo) {
                                                             <label className="form-label">Contact</label>
                                                         </div>
                                                         <div className="col-12 col-md-8 col-lg-8">
-                                                            <input type="text" className="profile-update-form" name="contact" value={contactNo} onChange={onContactNoChange} />
+                                                            <input type="text" className="profile-update-form" name="contactNo" value={contactNo} onChange={onContactNoChange} />
                                                         </div>
                                                     </div>
                                                     <div className="row mt-2 mt-md-3 mt-lg-3">
@@ -151,7 +179,7 @@ export default function DashProfile(userInfo) {
                                                                 Upload from here
                                                                 <svg className="ml-5" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#ffffff"><g><rect fill="none" height="24" width="24" /></g><g><path d="M18,15v3H6v-3H4v3c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-3H18z M7,9l1.41,1.41L11,7.83V16h2V7.83l2.59,2.58L17,9l-5-5L7,9z" /></g></svg>
                                                             </label>
-                                                            <input id="upload" type="file" />
+                                                            <input type="file" id="upload" name="photo" accept=".png, .jpg, .jpeg" onChange={onPhotoChange} />
                                                         </div>
                                                     </div>
                                                 </div>

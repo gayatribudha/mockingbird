@@ -4,6 +4,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../config');
 const validator = require('validator');
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
+let path = require('path');
 
 
 // list all stored stories
@@ -65,11 +68,11 @@ exports.login = function (req, res) {
                 res.status(401).json({ message: 'Authentication failed. Wrong password.' });
             } else {
                 res.json({
-                    token: jwt.sign({ email: user.email, fullname: user.fullname, _id: user._id }, process.env.JWTPASSWORD)
+                    token: jwt.sign({ email: user.email, fullname: user.fullname, _id: user._id, photo: user.photo }, process.env.JWTPASSWORD)
                 });
             }
         }
-    });
+    }); 
 };
 
 exports.dashboard = (req, res) => {
@@ -104,8 +107,28 @@ exports.userDetail = (req, res) => {
         });
 }
 
-exports.updateProfile = (req, res) => {
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'images');
+    },
+    filename: function (req, file, cb) {
+        cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    if (allowedFileTypes.includes(file.mimetype)) {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+}
+
+
+let updateProfile = (req, res) => {
+    console.log(req.file.filename);
     User.findByIdAndUpdate(
         req.params.id,
         {
@@ -113,7 +136,8 @@ exports.updateProfile = (req, res) => {
             email: req.body.email,
             bio: req.body.bio,
             address: req.body.address,
-            contactNo: req.body.contactNo
+            contactNo: req.body.contactNo,
+            photo: req.file.filename
         },
         { new: true }
     ).select('-__v')
@@ -132,3 +156,8 @@ exports.updateProfile = (req, res) => {
             });
         });
 }
+
+let upload = multer({ storage, fileFilter });
+
+exports.multerMiddleware = upload.single('photo');
+exports.updateProfile = updateProfile;

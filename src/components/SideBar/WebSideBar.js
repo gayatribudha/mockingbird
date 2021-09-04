@@ -33,7 +33,7 @@ export default function WebSideBar({ userInfo }) {
                     <NavLink to="/dashboard"><img className="mt-4" src={logo} alt="logo" /></NavLink>
 
                     <div className="mt-2 text-center">
-                        <img className="user_photo rounded-circle" src={pp} alt="profile" />
+                        <img className="user_photo rounded-circle" src={`http://localhost:3001/`+userInfo.photo} alt="profile" />
                         <p className="sb-user-name mt-1 mb-0 text-center"> {userInfo.fullname} </p>
                         <p className="sb-user-email" >{userInfo.email}</p>
                         <hr className="sb-hr-line" />

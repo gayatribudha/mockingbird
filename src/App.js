@@ -60,7 +60,7 @@ export function DashboardRoute({ component: Component, ...rest }) {
       try {
         let res = await axios.get('/dashboard', { headers: { "Authorization": `Bearer ${JWTToken}` } });
         setUserInfo(res.data.user);
-        console.log(userInfo);
+        console.log(userInfo.photo);
       }
       catch (error) {
         console.log(error);
