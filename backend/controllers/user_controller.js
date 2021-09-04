@@ -72,7 +72,7 @@ exports.login = function (req, res) {
                 });
             }
         }
-    }); 
+    });
 };
 
 exports.dashboard = (req, res) => {
@@ -128,33 +128,60 @@ const fileFilter = (req, file, cb) => {
 
 
 let updateProfile = (req, res) => {
-    console.log(req.file.filename);
-    User.findByIdAndUpdate(
-        req.params.id,
-        {
-            fullname: req.body.fullname,
-            email: req.body.email,
-            bio: req.body.bio,
-            address: req.body.address,
-            contactNo: req.body.contactNo,
-            photo: req.file.filename
-        },
-        { new: true }
-    ).select('-__v')
-        .then(user => {
-            if (!user) {
-                return res.status(404).send({
-                    message: "Error -> Cannot update profile with id = " + req.params.id,
-                    error: "Not Found!"
+    if (req.file === undefined) {
+        User.findByIdAndUpdate(
+            req.params.id,
+            {
+                fullname: req.body.fullname,
+                email: req.body.email,
+                bio: req.body.bio,
+                address: req.body.address,
+                contactNo: req.body.contactNo,
+            },
+            { new: true }
+        ).select('-__v')
+            .then(user => {
+                if (!user) {
+                    return res.status(404).send({
+                        message: "Error -> Cannot update profile with id = " + req.params.id,
+                        error: "Not Found!"
+                    });
+                }
+                res.status(200).json(user);
+            }).catch(err => {
+                return res.status(500).send({
+                    message: "Error -> Cannot update your profile with id = " + req.params.id,
+                    error: err.message
                 });
-            }
-            res.status(200).json(user);
-        }).catch(err => {
-            return res.status(500).send({
-                message: "Error -> Cannot update your profile with id = " + req.params.id,
-                error: err.message
             });
-        });
+    } else {
+        User.findByIdAndUpdate(
+            req.params.id,
+            {
+                fullname: req.body.fullname,
+                email: req.body.email,
+                bio: req.body.bio,
+                address: req.body.address,
+                contactNo: req.body.contactNo,
+                photo: req.file.filename
+            },
+            { new: true }
+        ).select('-__v')
+            .then(user => {
+                if (!user) {
+                    return res.status(404).send({
+                        message: "Error -> Cannot update profile with id = " + req.params.id,
+                        error: "Not Found!"
+                    });
+                }
+                res.status(200).json(user);
+            }).catch(err => {
+                return res.status(500).send({
+                    message: "Error -> Cannot update your profile with id = " + req.params.id,
+                    error: err.message
+                });
+            });
+    }
 }
 
 let upload = multer({ storage, fileFilter });
