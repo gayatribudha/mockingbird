@@ -60,7 +60,6 @@ export function DashboardRoute({ component: Component, ...rest }) {
       try {
         let res = await axios.get('/dashboard', { headers: { "Authorization": `Bearer ${JWTToken}` } });
         setUserInfo(res.data.user);
-        console.log(userInfo.photo);
       }
       catch (error) {
         console.log(error);
@@ -73,23 +72,23 @@ export function DashboardRoute({ component: Component, ...rest }) {
   //   alert('session storage variable value changed');
   // });
 
-  function requestUserInfo() {
-    console.log("helllllllllllllllllllll nooooooooooooooooooooo");
+  // function requestUserInfo() {
+  //   console.log("helllllllllllllllllllll nooooooooooooooooooooo");
 
-    let JWTToken = localStorage.getItem('user');
-    dashboard();
-    async function dashboard() {
-      try {
-        let res = await axios.get('/dashboard', { headers: { "Authorization": `Bearer ${JWTToken}` } });
-        setUserInfo(res.data.user);
-        console.log(userInfo);
-      }
-      catch (error) {
-        console.log(error);
-        routerHistory.push('/beapart');
-      }
-    }
-  }
+  //   let JWTToken = localStorage.getItem('user');
+  //   dashboard();
+  //   async function dashboard() {
+  //     try {
+  //       let res = await axios.get('/dashboard', { headers: { "Authorization": `Bearer ${JWTToken}` } });
+  //       setUserInfo(res.data.user);
+  //       console.log(userInfo);
+  //     }
+  //     catch (error) {
+  //       console.log(error);
+  //       routerHistory.push('/beapart');
+  //     }
+  //   }
+  // }
 
 
   return (

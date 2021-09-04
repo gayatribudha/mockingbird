@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { NavLink, Link } from 'react-router-dom';
 import { useHistory } from 'react-router'
 
-import user from '../../pages/Dashboard/Dashboard';
 import logo from '../../assets/images/logo.png';
 import pp from '../../assets/images/pp.jpg';
 import birdIcon from '../../assets/images/birdIcon.png';
@@ -33,7 +32,7 @@ export default function WebSideBar({ userInfo }) {
                     <NavLink to="/dashboard"><img className="mt-4" src={logo} alt="logo" /></NavLink>
 
                     <div className="mt-2 text-center">
-                        <img className="user_photo rounded-circle" src={`http://localhost:3001/`+userInfo.photo} alt="profile" />
+                        <img className="user_photo rounded-circle" src={`http://localhost:3001/` + userInfo.photo} alt="profile" />
                         <p className="sb-user-name mt-1 mb-0 text-center"> {userInfo.fullname} </p>
                         <p className="sb-user-email" >{userInfo.email}</p>
                         <hr className="sb-hr-line" />
@@ -79,9 +78,9 @@ export default function WebSideBar({ userInfo }) {
                         <li className="sidebar-nav-item mt-2">
 
                             <Link onClick={() => {
-                                localStorage.removeItem("user");
+                                localStorage.removeItem("user");    
                                 routerHistory.push('/beapart');
-                            }} activeClassName="sidebar-menu_active" className="sidebar-nav-link">
+                            }} className="sidebar-nav-link" to="">
                                 <svg className="icon mr-3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17 8L15.59 9.41L17.17 11H9V13H17.17L15.59 14.58L17 16L21 12L17 8ZM5 5H12V3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H12V19H5V5Z" fill="#4A4A4A" />
                                 </svg>
@@ -108,9 +107,9 @@ export default function WebSideBar({ userInfo }) {
 
                             <button className="phone-sidebar-toggler" id="phone-sidebarCollapse">
                                 <svg width="34" height="23" viewBox="0 0 34 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <line y1="1" x2="34" y2="1" stroke="#730875" stroke-width="2" />
-                                    <line y1="11" x2="34" y2="11" stroke="#730875" stroke-width="2" />
-                                    <line y1="22" x2="34" y2="22" stroke="#730875" stroke-width="2" />
+                                    <line y1="1" x2="34" y2="1" stroke="#730875" strokeWidth="2" />
+                                    <line y1="11" x2="34" y2="11" stroke="#730875" strokeWidth="2" />
+                                    <line y1="22" x2="34" y2="22" stroke="#730875" strokeWidth="2" />
                                 </svg>
                             </button>
                             <img className="mt-3" src={birdIcon} alt="birdIcon" />
@@ -172,7 +171,7 @@ export default function WebSideBar({ userInfo }) {
                             <Link onClick={() => {
                                 localStorage.removeItem("user");
                                 routerHistory.push('/beapart');
-                            }} activeClassName="sidebar-menu_active" className="sidebar-nav-link">
+                            }} className="sidebar-nav-link" to="">
                                 <svg className="icon mr-3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17 8L15.59 9.41L17.17 11H9V13H17.17L15.59 14.58L17 16L21 12L17 8ZM5 5H12V3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H12V19H5V5Z" fill="#4A4A4A" />
                                 </svg>

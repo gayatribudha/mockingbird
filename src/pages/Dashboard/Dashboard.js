@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import '../../assets/css/dashboard.css';
 import birdIcon from '../../assets/images/birdIcon.png';
-import { useHistory } from 'react-router';
-import axios from "axios";
 // import WebSideBar from '../../components/SideBar/WebSideBar';
 
 

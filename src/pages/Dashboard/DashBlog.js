@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Pagination from './Pagination';
-import Blog from './Blog';
 import axios from "axios";
 import { useHistory } from 'react-router';
 
@@ -10,24 +8,9 @@ import { useHistory } from 'react-router';
 import '../../assets/css/dashboard.css';
 
 export default function DashBlog() {
-    const [error, setError] = useState(null);
     const [blogs, setBlogs] = useState([]);
 
     const routerHistory = useHistory();
-    const [userInfo, setUserInfo] = useState([]);
-
-    // useEffect(() => {
-    //     fetch('/blogs')
-    //         .then((response) => {
-    //             if (response.ok) return response.json();
-    //             throw new Error('something went wrong while requesting posts');
-    //         })
-    //         .then((blogs) => setBlogs(blogs))
-    //         .catch((error) => setError(error.message));
-    //         console.log(blogs);
-    // }, []);
-
-    // if (error) return <h6>{error}</h6>;
 
     useEffect(() => {
         let JWTToken = localStorage.getItem('user');
@@ -36,9 +19,6 @@ export default function DashBlog() {
             try {
                 let res = await axios.get('/blogs', { headers: { "Authorization": `Bearer ${JWTToken}` } });
                 setBlogs(res.data);
-                // console.log(res.data.userInfo);
-                // setUserInfo(res.data.user);
-                // console.log(userInfo);
             }
             catch (error) {
                 console.log(error);
@@ -71,14 +51,14 @@ export default function DashBlog() {
 
                 {blogs.map(blog => (
                     <div key={blog._id} className="col-sm-12 col-md-5 col-lg-5 ml-md-4 ml-lg-4  mt-3 d-blog-card">
-                        <Link activeClassName="sidebar-menu_active" to={`/dashboard/blog/${blog._id}`} style={{ textDecoration: "none" }}>
+                        <Link to={`/dashboard/blog/${blog._id}`} style={{ textDecoration: "none" }}>
                             <div className="pt-3">
                                 <h3 className="blog-title">{blog.title}</h3>
-                                <p className="blog-para"><div dangerouslySetInnerHTML={{ __html: blog.description }}></div></p>
+                                <div className="blog-para" dangerouslySetInnerHTML={{ __html: blog.description }}></div>
                             </div>
                         </Link>
                         <form>
-                            <p >Publish <input className="publish-checkbox" type="checkbox" name="publish" /></p>
+                            <p>Publish <input className="publish-checkbox" type="checkbox" name="publish" /></p>
                         </form>
                     </div>
                 ))}

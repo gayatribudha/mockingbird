@@ -4,12 +4,11 @@ import { useHistory } from 'react-router'
 import axios from "axios";
 // import { useParams } from "react-router-dom";
 
-import pp from '../../assets/images/pp.jpg';
 import '../../assets/css/dashboard.css';
 
 
 export default function DashProfile(userInfo) {
-    console.log(userInfo.userInfo._id);
+    // console.log(userInfo.userInfo._id);
 
     const [fullname, setFullname] = useState("");
     const [email, setEmail] = useState("");
@@ -19,7 +18,7 @@ export default function DashProfile(userInfo) {
     const [photo, setPhoto] = useState("");
 
 
-    const [hasError, setErrors] = useState(false);
+    const [errors, setErrors] = useState(false);
 
 
     const routerHistory = useHistory();
@@ -36,7 +35,6 @@ export default function DashProfile(userInfo) {
                     setAddress(res.address);
                     setContactNo(res.contactNo);
                     setPhoto(res.photo);
-                    console.log(`http://localhost:3001/`+res.photo)
                 })
                 .catch(err => setErrors(err));
         }
@@ -118,7 +116,7 @@ export default function DashProfile(userInfo) {
 
 
                             {/* Update Profile Modal */}
-                            <div className="modal fade" id="updateProfile" tabindex="-1" role="dialog" aria-labelledby="updateProfileLabel" aria-hidden="true">
+                            <div className="modal fade" id="updateProfile" tabIndex="-1" role="dialog" aria-labelledby="updateProfileLabel" aria-hidden="true">
                                 <div className="modal-dialog" role="document">
                                     <form onSubmit={handleSubmit} encType='multipart/form-data'>
                                         <div className="modal-content">
@@ -175,9 +173,9 @@ export default function DashProfile(userInfo) {
                                                             <label className="form-label">Profile Picture</label>
                                                         </div>
                                                         <div className="col-12 col-md-7 col-lg-7 profile-upload-btn-wrap">
-                                                            <label className="profile-upload-btn" for="upload">
+                                                            <label className="profile-upload-btn" htmlFor="upload">
                                                                 Upload from here
-                                                                <svg className="ml-5" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#ffffff"><g><rect fill="none" height="24" width="24" /></g><g><path d="M18,15v3H6v-3H4v3c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-3H18z M7,9l1.41,1.41L11,7.83V16h2V7.83l2.59,2.58L17,9l-5-5L7,9z" /></g></svg>
+                                                                <svg className="ml-5" xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#ffffff"><g><rect fill="none" height="24" width="24" /></g><g><path d="M18,15v3H6v-3H4v3c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-3H18z M7,9l1.41,1.41L11,7.83V16h2V7.83l2.59,2.58L17,9l-5-5L7,9z" /></g></svg>
                                                             </label>
                                                             <input type="file" id="upload" name="photo" accept=".png, .jpg, .jpeg" onChange={onPhotoChange} />
                                                         </div>
@@ -186,7 +184,7 @@ export default function DashProfile(userInfo) {
                                             </div>
                                             <div className="modal-footer">
                                                 <button type="submit" className="delete-btn">Update</button>
-                                                <button type="button" class="delete-btn" data-dismiss="modal">Cancel</button>
+                                                <button type="button" className="delete-btn" data-dismiss="modal">Cancel</button>
                                             </div>
                                         </div>
                                     </form>
@@ -196,7 +194,7 @@ export default function DashProfile(userInfo) {
 
 
                             {/* Change Password */}
-                            <div className="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePasswordLabel" aria-hidden="true">
+                            <div className="modal fade" id="changePassword" tabIndex="-1" role="dialog" aria-labelledby="changePasswordLabel" aria-hidden="true">
                                 <div className="modal-dialog" role="document">
                                     <form >
                                         <div className="modal-content">
@@ -236,7 +234,7 @@ export default function DashProfile(userInfo) {
                                             </div>
                                             <div className="modal-footer">
                                                 <button type="submit" className="delete-btn" data-dismiss="modal">Save</button>
-                                                <button type="button" class="delete-btn" data-dismiss="modal">Cancel</button>
+                                                <button type="button" className="delete-btn" data-dismiss="modal">Cancel</button>
 
                                             </div>
                                         </div>

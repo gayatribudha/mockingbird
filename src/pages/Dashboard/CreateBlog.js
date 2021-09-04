@@ -1,14 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import swal from 'sweetalert';
 import { useHistory } from 'react-router'
 import { Editor } from '@tinymce/tinymce-react';
 
 import '../../assets/css/dashboard.css';
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom';
-
-const regularExpression = RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
 
 
 export default function CreateBlog(userInfo) {
@@ -75,7 +71,7 @@ export default function CreateBlog(userInfo) {
 
 
                             <label className="form-label">Author</label><br />
-                            <input required className="form-field mt-0" type="text" value={author} onChange={onAuthorChange} required></input><br />
+                            <input required className="form-field mt-0" type="text" value={author} onChange={onAuthorChange}></input><br />
 
                             <input hidden className="form-field mt-0" type="text" value={userId}></input><br />
 

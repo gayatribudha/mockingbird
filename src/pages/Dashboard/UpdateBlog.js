@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams } from "react-router-dom";
 import swal from 'sweetalert';
 import { useHistory } from 'react-router';
@@ -11,8 +11,6 @@ import '../../assets/css/dashboard.css';
 
 
 export default function CreateBlog() {
-
-    const editorRef = useRef(null);
 
     const id = useParams();
     console.log(id.blogId)

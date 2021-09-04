@@ -99,10 +99,10 @@ export default function ShowBlog() {
 
                     </h3>
                     <div className="" style={{ height: "380px", overflowY: "scroll" }}>
-                        <p className="m-3">
+                        
                             {/* {props.location.blogDetail.description} */}
                             <div dangerouslySetInnerHTML={{ __html: blog.description }}></div>
-                        </p>
+                        
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import Footer from '../partials/Footer/Footer';
 import '../assets/css/beAPart.css';
 import { Link } from 'react-router-dom';
@@ -76,7 +76,7 @@ export default function Register() {
 
             setPasswordMatch(true);
 
-        } else if (data.password != confirmPassword) {
+        } else if (data.password !== confirmPassword) {
             setPasswordMatch(false);
 
             setErrorPassword(false);

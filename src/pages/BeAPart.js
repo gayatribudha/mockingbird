@@ -3,7 +3,6 @@ import Footer from '../partials/Footer/Footer';
 import '../assets/css/beAPart.css';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import swal from 'sweetalert';
 import axios from "axios";
 
 export default function BeAPart() {
@@ -12,8 +11,6 @@ export default function BeAPart() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const [requestUserInfo, setRequestUserInfo] = useState("");
 
     const [errorEmail, setErrorEmail] = useState(false);
     const [errorPassword, setErrorPassword] = useState(false);
@@ -31,12 +28,11 @@ export default function BeAPart() {
             .then(response => {
                 localStorage.setItem('user', response.data.token);
                 routerHistory.push('/dashboard');
-                // requestUserInfo();
             })
             .catch(err => {
                 console.log(err);
 
-                if (err.response.status == 401) {
+                if (err.response.status === 401) {
                     setErrorPassword(true);
                 } else {
                     setErrorPassword(true);

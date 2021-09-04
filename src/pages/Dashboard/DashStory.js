@@ -31,7 +31,7 @@ export default function DashStory() {
                 {
                     [1, 2, 3].map(n => (
                         <div className="col-sm-12 col-md-5 col-lg-5 ml-md-4 ml-lg-4  mt-3 d-blog-card">
-                            <Link activeClassName="sidebar-menu_active" to="/dashboard/show-story" style={{ textDecoration: "none" }}>
+                            <Link to="/dashboard/show-story" style={{ textDecoration: "none" }}>
                                 <div className="pt-3">
 
                                     <h3 className="blog-title">Inside the city of glass and steel.</h3>
@@ -40,7 +40,7 @@ export default function DashStory() {
                                 </div>
                             </Link>
                             <form>
-                                <p class="hola"> Publish <input className="publish-checkbox" type="checkbox" name="publish" /></p>
+                                <p className="hola"> Publish <input className="publish-checkbox" type="checkbox" name="publish" /></p>
                             </form>
                         </div>
                     ))
