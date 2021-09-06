@@ -107,6 +107,33 @@ exports.userDetail = (req, res) => {
         });
 }
 
+exports.changePassword = (req, res) => {
+    console.log(req.params.id);
+    console.log("Inside Change Password");
+    User.findByIdAndUpdate(
+        req.params.id,
+        {
+            password: req.body.newPassword,
+            hash_password: bcrypt.hashSync(req.body.newPassword, 10)
+        },
+        { new: true }
+    ).select('-__v')
+        .then(user => {
+            if (!user) {
+                return res.status(404).send({
+                    message: "Error -> Cannot change password with id = " + req.params.id,
+                    error: "Not Found!"
+                });
+            }
+            res.status(200).json(user);
+        }).catch(err => {
+            return res.status(500).send({
+                message: "Error -> Cannot change password with id = " + req.params.id,
+                error: err.message
+            });
+        });
+}
+
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
