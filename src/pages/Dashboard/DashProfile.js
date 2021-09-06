@@ -5,6 +5,7 @@ import axios from "axios";
 // import { useParams } from "react-router-dom";
 
 import '../../assets/css/dashboard.css';
+import defaultPP from '../../assets/images/defaultPP.png';
 
 
 export default function DashProfile(userInfo) {
@@ -150,7 +151,7 @@ export default function DashProfile(userInfo) {
             <div className="container" id="">
                 <div className="row pt-5 pt-md-5 pt-lg-5    ">
                     <div className="col pl-5 mx-mt-2 mx-lg-5 px-md-2 px-lg-5 mt-5 mt-md-5 mt-lg-5 pt-md-5 pt-lg-5 d-flex flex-column flex-md-row  flex-lg-row">
-                        <img src={`http://localhost:3001/` + photo} alt="profile" style={{ borderRadius: "50px", width: "100px", height: "100px" }} />
+                        <img src={ photo ? `http://localhost:3001/` + photo : defaultPP} alt="profile" style={{ borderRadius: "50px", width: "100px", height: "100px" }} />
                         <div className=" pl-1 ml-md-5 l-lg-5 mt-2 mt-md-4 mt-lg-4">
                             <p className="p-user-name mb-0 pb-0">{fullname}</p>
                             <p className="p-user-email mt-0 pt-0">{email}< br /></p>

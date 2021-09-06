@@ -4,6 +4,8 @@ import { useHistory } from 'react-router'
 
 import logo from '../../assets/images/logo.png';
 import pp from '../../assets/images/pp.jpg';
+import defaultPP from '../../assets/images/defaultPP.png';
+
 import birdIcon from '../../assets/images/birdIcon.png';
 import $ from 'jquery';
 
@@ -32,7 +34,7 @@ export default function WebSideBar({ userInfo }) {
                     <NavLink to="/dashboard"><img className="mt-4" src={logo} alt="logo" /></NavLink>
 
                     <div className="mt-2 text-center">
-                        <img className="user_photo rounded-circle" src={`http://localhost:3001/` + userInfo.photo} alt="profile" />
+                        <img className="user_photo rounded-circle" src={ userInfo.photo ? `http://localhost:3001/` + userInfo.photo : defaultPP} alt="profile" />
                         <p className="sb-user-name mt-1 mb-0 text-center"> {userInfo.fullname} </p>
                         <p className="sb-user-email" >{userInfo.email}</p>
                         <hr className="sb-hr-line" />
