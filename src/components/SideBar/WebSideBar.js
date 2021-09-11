@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom';
 import { useHistory } from 'react-router'
 
@@ -21,9 +21,24 @@ $(document).ready(function () {
 
 
 
-export default function WebSideBar({ userInfo }) {
+export default function WebSideBar({ userInfo}) {
 
     const routerHistory = useHistory();
+
+    const [userDetail, setUserDetail] = useState("");
+    const [erros, setErrors] = useState("");
+
+    useEffect(() => {
+        fetchData();
+        async function fetchData() {
+            const res = await fetch(`/${userInfo._id}/userDetail`);
+            res.json()
+                .then(res => {
+                    setUserDetail(res);
+                })
+                .catch(err => setErrors(err));
+        }
+    }, [])
 
     return (
         <div>
@@ -34,9 +49,9 @@ export default function WebSideBar({ userInfo }) {
                     <NavLink to="/dashboard"><img className="mt-4" src={logo} alt="logo" /></NavLink>
 
                     <div className="mt-2 text-center">
-                        <img className="user_photo rounded-circle" src={ userInfo.photo ? `http://localhost:3001/` + userInfo.photo : defaultPP} alt="profile" />
-                        <p className="sb-user-name mt-1 mb-0 text-center"> {userInfo.fullname} </p>
-                        <p className="sb-user-email" >{userInfo.email}</p>
+                        <img className="user_photo rounded-circle" src={ userDetail.photo ? `http://localhost:3001/` + userDetail.photo : defaultPP} alt="profile" />
+                        <p className="sb-user-name mt-1 mb-0 text-center"> {userDetail.fullname} </p>
+                        <p className="sb-user-email" >{userDetail.email}</p>
                         <hr className="sb-hr-line" />
                     </div>
                     <ul className="sidebar-nav-items">

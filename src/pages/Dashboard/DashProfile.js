@@ -8,7 +8,7 @@ import '../../assets/css/dashboard.css';
 import defaultPP from '../../assets/images/defaultPP.png';
 
 
-export default function DashProfile(userInfo) {
+export default function DashProfile({ userInfo}) {
     // console.log(userInfo.userInfo._id);
 
     const [fullname, setFullname] = useState("");
@@ -34,20 +34,44 @@ export default function DashProfile(userInfo) {
     useEffect(() => {
         fetchData();
         async function fetchData() {
-            const res = await fetch(`/${userInfo.userInfo._id}/userDetail`);
+            const res = await fetch(`/${userInfo._id}/userDetail`);
             res.json()
                 .then(res => {
-                    setFullname(res.fullname);   // here res is the object of user detail that contains id, title, author, description
-                    setEmail(res.email);
-                    setBio(res.bio);
-                    setAddress(res.address);
-                    setContactNo(res.contactNo);
-                    setPhoto(res.photo);
-                    setPassword(res.password);
+                    setFullname(res.fullname ?? "");   // here res is the object of user detail that contains id, title, author, description
+                    setEmail(res.email ?? "");
+                    setBio(res.bio ?? "");
+                    setAddress(res.address ?? "");
+                    setContactNo(res.contactNo ?? "");
+                    setPhoto(res.photo ?? "");
+                    setPassword(res.password ?? "");
+                    // onUserUpdate(
+                    //     res.photo
+                    // );
                 })
                 .catch(err => setErrors(err));
         }
     }, [])
+
+    function updateUserInfo() {
+        fetchData();
+        async function fetchData() {
+            const res = await fetch(`/${userInfo._id}/userDetail`);
+            res.json()
+                .then(res => {
+                    setFullname(res.fullname ?? "");   // here res is the object of user detail that contains id, title, author, description
+                    setEmail(res.email ?? "");
+                    setBio(res.bio ?? "");
+                    setAddress(res.address ?? "");
+                    setContactNo(res.contactNo ?? "");
+                    setPhoto(res.photo ?? "");
+                    setPassword(res.password ?? "");
+                    // onUserUpdate(
+                    //     res.photo
+                    // );
+                })
+                .catch(err => setErrors(err));
+        }
+    }
 
     const onFullnameChange = e => setFullname(e.target.value);
     const onEmailChange = e => setEmail(e.target.value);
@@ -96,7 +120,7 @@ export default function DashProfile(userInfo) {
     const handleChangePassword = e => {
         e.preventDefault();
         console.log(newPassword);
-        axios.put(`/${userInfo.userInfo._id}/changePassword`, { newPassword })
+        axios.put(`/${userInfo._id}/changePassword`, { newPassword })
             .then(response => {
                 swal({
                     title: "Saved.",
@@ -119,6 +143,7 @@ export default function DashProfile(userInfo) {
         e.preventDefault();
         // const data = { fullname, email, bio, address, contactNo};
 
+        console.log(photo);
         let formData = new FormData();
         formData.append('photo', photo);
         formData.append('fullname', fullname);
@@ -129,14 +154,15 @@ export default function DashProfile(userInfo) {
 
         // console.log(formData.get('contactNo'));
         const config = { headers: { 'Content-Type': 'multipart/form-data' } }
-        axios.put(`/${userInfo.userInfo._id}/updateProfile`, formData, config)
+        axios.put(`/${userInfo._id}/updateProfile`, formData, config)
             .then(res => {
                 swal({
                     title: "Updated!!",
                     text: "Your profile is updated successfully!",
                     icon: "success",
                 })
-                routerHistory.push('/dashboard/profile');
+                updateUserInfo();
+
             })
             .catch(err => {
                 console.log(err);
@@ -151,7 +177,7 @@ export default function DashProfile(userInfo) {
             <div className="container" id="">
                 <div className="row pt-5 pt-md-5 pt-lg-5    ">
                     <div className="col pl-5 mx-mt-2 mx-lg-5 px-md-2 px-lg-5 mt-5 mt-md-5 mt-lg-5 pt-md-5 pt-lg-5 d-flex flex-column flex-md-row  flex-lg-row">
-                        <img src={ photo ? `http://localhost:3001/` + photo : defaultPP} alt="profile" style={{ borderRadius: "50px", width: "100px", height: "100px" }} />
+                        <img src={photo ? `http://localhost:3001/` + photo : defaultPP} alt="profile" style={{ borderRadius: "50px", width: "100px", height: "100px" }} />
                         <div className=" pl-1 ml-md-5 l-lg-5 mt-2 mt-md-4 mt-lg-4">
                             <p className="p-user-name mb-0 pb-0">{fullname}</p>
                             <p className="p-user-email mt-0 pt-0">{email}< br /></p>
@@ -231,7 +257,7 @@ export default function DashProfile(userInfo) {
                                                 </div>
                                             </div>
                                             <div className="modal-footer">
-                                                <button type="submit" className="delete-btn">Update</button>
+                                                <button type="submit" className="delete-btn" >Update</button>
                                                 <button type="button" className="delete-btn" data-dismiss="modal">Cancel</button>
                                             </div>
                                         </div>
