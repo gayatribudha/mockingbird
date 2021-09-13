@@ -4,7 +4,7 @@ import axios from "axios";
 import { useHistory } from 'react-router';
 
 
-
+import ToggleBtn from '../../components/ToggleBtn/ToggleBtn';
 import '../../assets/css/dashboard.css';
 
 export default function DashBlog() {
@@ -57,10 +57,9 @@ export default function DashBlog() {
                                 <div className="blog-para" dangerouslySetInnerHTML={{ __html: blog.description }}></div>
                             </div>
                         </Link>
-                        <form>
-                            <p>Publish <input className="publish-checkbox" type="checkbox" name="publish" /></p>
-                        </form>
+                        <ToggleBtn blogId={blog._id} />
                     </div>
+
                 ))}
 
                 {/* {blogs.length > 0 ? (

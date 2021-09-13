@@ -1,0 +1,30 @@
+.round-slider-container {
+    width: 47px;
+    height: 20px;
+    background: #dfdedf;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    -webkit-transition: 0.4s;
+
+}
+
+.round-slider {
+    width: 20px;
+    height: 16px;
+    border-radius: 50px;
+    background: #fff;
+    top: 2px;
+    left: 2px;
+    position: absolute;
+    -webkit-transition: 0.4s;
+
+}
+
+.checkbox-input:checked + .round-slider-container .round-slider {
+    transform: translateX(24px);
+}
+
+.checkbox-input:checked + .round-slider-container {
+    background-color: #ba14bd;
+}
