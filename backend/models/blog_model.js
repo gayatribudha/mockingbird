@@ -13,6 +13,9 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    publish: {
+        type: Boolean
+    },
     userId: {
         type: String,
         required: true
