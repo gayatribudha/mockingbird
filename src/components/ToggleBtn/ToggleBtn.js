@@ -3,26 +3,41 @@ import React, { useState, useEffect } from 'react';
 
 import './ToggleBtn.css';
 
-export default function ToggleBtn({ blogId }) {
+export default function ToggleBtn({ id, checkedStatus }) {
 
-    const [isClicked, setIsClicked] = useState(false);
+    const [publish, setPublish] = useState(checkedStatus);
 
     const handleCheckbox = () => {
-        if (isClicked == true) {
-            setIsClicked(false);
+        if (publish === false) {
+            setPublish(true);
         } else {
-            setIsClicked(true);
-
+            setPublish(false);
         }
     }
-    console.log(isClicked);
+
+    console.log(publish);
+
+    useEffect(() => {
+        console.log(publish);
+            const requestOptions = {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ publish })
+            };
+            fetch(`/blogs/${id}/update`, requestOptions)
+                .then(response => response.json())
+                .then(res => console.log(res));
+    });
+
+
     return (
         <form className="float-right">
             <div id="toggle-btn" className="d-flex">
                 <p className="mr-2">Publish</p>
-                <input hidden type="checkbox" checked={isClicked} id={blogId} className="checkbox-input" onChange={handleCheckbox} />
+                <input hidden type="checkbox" checked={publish} id={id} className="checkbox-input"
+                    onChange={handleCheckbox} />
 
-                <label for={blogId} className="round-slider-container">
+                <label htmlFor={id} className="round-slider-container">
                     <div></div>
                     <div></div>
                     <div className="round-slider"></div>

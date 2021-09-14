@@ -22,7 +22,7 @@
 }
 
 .checkbox-input:checked + .round-slider-container .round-slider {
-    transform: translateX(24px);
+    transform: translateX(23px);
 }
 
 .checkbox-input:checked + .round-slider-container {
