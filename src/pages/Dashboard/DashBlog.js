@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { useHistory } from 'react-router';
+import { FaSearch } from "react-icons/fa";
 
 
 import ToggleBtn from '../../components/ToggleBtn/ToggleBtn';
@@ -27,6 +28,12 @@ export default function DashBlog() {
         }
     }, []);
 
+    const [searchItem, setSearchItem] = useState();
+
+    const handleSearch = (e) => {
+        setSearchItem(e.target.value);
+    }
+
     return (
         <div className="dashboard">
             <div className="row px-3 px-md-5 pt-lg-5 flex flex-row">
@@ -47,20 +54,45 @@ export default function DashBlog() {
                     </div>
                 </div>
             </div>
-            <div className="row px-4 px-md-5 px-lg-5  mt-4 mt-md-4 mt-lg-4 blogs-box">
+            <div className="row px-4 px-md-5 px-lg-5  mt-4 mt-md-4 mt-lg-4">
+                <div className="col">
 
-                {blogs.map(blog => (
-                    <div key={blog._id} className="col-sm-12 col-md-5 col-lg-5 ml-md-4 ml-lg-4  mt-3 d-blog-card">
-                        <Link to={`/dashboard/blog/${blog._id}`} style={{ textDecoration: "none" }}>
-                            <div className="pt-3">
-                                <h3 className="blog-title">{blog.title}</h3>
-                                <div className="blog-para" dangerouslySetInnerHTML={{ __html: blog.description }}></div>
+                    <div className="d-flex float-right">
+                        <input className="search-bar" type="text" placeholder="Search.." name="search" onChange={handleSearch} />
+                        <div className="search-icon-container">
+                            <div className="" style={{ marginLeft: "5px", position: "absolute" }}>
+                                <svg stroke="currentColor" fill="#ba14bd" stroke-width="0" viewBox="0 0 512 512" height="1em"
+                                    width="1em" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 
+                                    44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 
+                                    6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 
+                                    336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z">
+                                    </path>
+                                </svg>
                             </div>
-                        </Link>
-                        <ToggleBtn id={blog._id} checkedStatus={blog.publish}/>
+                        </div>
                     </div>
 
-                ))}
+                </div>
+
+            </div>
+            <div className="row px-4 px-md-5 px-lg-5  mt-4 mt-md-4 mt-lg-4 blogs-box">
+
+                {
+                    blogs.filter(blog => blog.title.includes(searchItem)).map(blog => (
+                        <div key={blog._id} className="col-sm-12 col-md-5 col-lg-5 ml-md-4 ml-lg-4  mt-3 d-blog-card">
+                            <Link to={`/dashboard/blog/${blog._id}`} style={{ textDecoration: "none" }}>
+                                <div className="pt-3">
+                                    <h3 className="blog-title">{blog.title}</h3>
+                                    <div className="blog-para" dangerouslySetInnerHTML={{ __html: blog.description }}></div>
+                                </div>
+                            </Link>
+                            <ToggleBtn id={blog._id} checkedStatus={blog.publish} /> 
+                        </div>
+
+                    ))
+                }
+
 
                 {/* {blogs.length > 0 ? (
                     <>

@@ -257,6 +257,43 @@ input[type="file"] {
     height: 0;
 }
 
+.search-bar {
+    text-indent: 10px;
+    /* border-radius: 20px; */
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    border-left: 0px;
+    border-color: #e0e0e0;
+    background-color: #fafafa;
+}
+.search-bar:focus {
+    border-color: #ba14bd;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.search-bar::placeholder {
+    font-size: 15px;
+}
+
+.search-icon-container {
+    height: 33px;
+    width: 35px;
+    position: relative;
+    /* border-top-right-radius: 20px; */
+    /* border-bottom-right-radius: 20px; */
+    border-top: 0px;
+    border-right: 0px;
+    border-bottom: 2px solid #e0e0e0;   
+    /* background-color: white;  */
+}
+
+.search-bar:focus + .search-icon-container {
+    border-color: #ba14bd;
+}
+
 @media screen and (max-width: 768px) {
     .dashboard-content {
         margin: auto;
