@@ -31,13 +31,13 @@ export default function ToggleBtn({ id, checkedStatus }) {
 
 
     return (
-        <form className="float-right">
+        <form className="float-right mt-2" >
             <div id="toggle-btn" className="d-flex">
                 <p className="mr-2">Publish</p>
                 <input hidden type="checkbox" checked={publish} id={id} className="checkbox-input"
                     onChange={handleCheckbox} />
 
-                <label htmlFor={id} className="round-slider-container">
+                <label htmlFor={id} className="round-slider-container mt-1">
                     <div></div>
                     <div></div>
                     <div className="round-slider"></div>

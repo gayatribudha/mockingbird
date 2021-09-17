@@ -16,6 +16,10 @@ const blogSchema = new mongoose.Schema({
     publish: {
         type: Boolean
     },
+    createdOn: {
+        type: Date,
+        default: Date.now
+    },
     userId: {
         type: String,
         required: true

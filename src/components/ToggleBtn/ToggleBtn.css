@@ -1,6 +1,6 @@
 .round-slider-container {
-    width: 47px;
-    height: 20px;
+    width: 45px;
+    height: 15px;
     background: #dfdedf;
     border-radius: 50px;
     cursor: pointer;
@@ -10,8 +10,8 @@
 }
 
 .round-slider {
-    width: 20px;
-    height: 16px;
+    width: 18px;
+    height: 11px;
     border-radius: 50px;
     background: #fff;
     top: 2px;
@@ -22,7 +22,7 @@
 }
 
 .checkbox-input:checked + .round-slider-container .round-slider {
-    transform: translateX(23px);
+    transform: translateX(22px);
 }
 
 .checkbox-input:checked + .round-slider-container {
