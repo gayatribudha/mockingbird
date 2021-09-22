@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import swal from 'sweetalert';
 import { useHistory } from 'react-router'
 import { Editor } from '@tinymce/tinymce-react';
@@ -12,11 +12,22 @@ export default function CreateBlog(userInfo) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [author, setAuthor] = useState("");
+    const [category, setCategory] = useState("");
     const [userId, setUserId] = useState("");
 
+    
+    const urlCategory = useParams();
+
+
+    console.log(category.category);
 
     useEffect(() => {
         setUserId(userInfo.userInfo._id);
+        if (urlCategory.category === "blog") {
+            setCategory('blog');
+        } else {
+            setCategory('story');
+        }
     })
 
     const onTitleChange = e => setTitle(e.target.value);
@@ -28,10 +39,9 @@ export default function CreateBlog(userInfo) {
     const routerHistory = useHistory();
 
 
-
     const handleSubmit = e => {
         e.preventDefault();
-        const data = { title, description, author, userId };
+        const data = { title, description, author, category, userId };
         if (data.description === "") {
             data.description = "Blog Yet to write.";
         }
@@ -44,10 +54,14 @@ export default function CreateBlog(userInfo) {
             .then(response => response.json())
             .then(res => swal({
                 title: "Saved!!",
-                text: "Your blog is saved successfully!",
+                text: "Saved successfully!",
                 icon: "success",
             }).then(function () {
-                routerHistory.push('/dashboard/blog');
+                if (urlCategory.category === "blog") {
+                    routerHistory.push('/dashboard/blog');
+                } else {
+                    routerHistory.push('/dashboard/story');
+                }
             }))
             .catch(err => {
                 swal("Oops!", "Seems like we couldn't fetch data", "error");
@@ -58,14 +72,14 @@ export default function CreateBlog(userInfo) {
         <div className="dashboard">
             <div className="row px-3 px-md-5 pt-lg-5">
                 <div className="col pt-5 pt-md-5 pt-lg-0">
-                    <h2 className="d-blog-sub-title mt-5 mt-md-0 mt-lg-0">Create Blog</h2>
+                    <h2 className="d-blog-sub-title mt-5 mt-md-0 mt-lg-0">{urlCategory.category === 'blog' ? "Create Blog" : "Create Story"}</h2>
                 </div>
             </div>
             <div className="row px-3     px-md-0 px-lg-0">
                 <div className="col mx-2 mx-md-5 mx-lg-5 my-md-3  create-box">
                     <form onSubmit={handleSubmit}>
                         <div className="px-1 py-1 px-md-3 px-lg-3 pt-md-3 pt-lg-3">
-                            <label className="form-label">Blog Title</label><br />
+                            <label className="form-label">{urlCategory.category === 'blog' ? "Blog Title" : "Story Title"}</label><br />
                             <input required className="requiredField form-field mt-0" type="text" value={title} onChange={onTitleChange}></input><br />
                             <br />
 
@@ -75,7 +89,7 @@ export default function CreateBlog(userInfo) {
 
                             <input hidden className="form-field mt-0" type="text" value={userId}></input><br />
 
-                            <label className="form-label mt-3">Blog</label> <br />
+                            <label className="form-label mt-3">{urlCategory.category === 'blog' ? "Blog" : "Story"}</label> <br />
                             <Editor required
                                 apiKey='ae8usjpq17flqzzs5cmkknz85iso0czxaieq68evxqpqg377'
                                 value={description}
@@ -107,7 +121,7 @@ export default function CreateBlog(userInfo) {
                         </div>
                         <div className="mb-3 px-1 px-md-3 px-lg-3">
                             <button type="submit" className="delete-btn" >Save</button>
-                            <Link to="/dashboard/blog"><button className="delete-btn ml-2 mt-4 ">Cancel</button></Link>
+                            <Link to={urlCategory.category === "blog" ? "/dashboard/blog" : "/dashboard/story"}><button className="delete-btn ml-2 mt-4 ">Cancel</button></Link>
                         </div>
                     </form>
                 </div>

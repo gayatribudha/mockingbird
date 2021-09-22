@@ -8,11 +8,11 @@ const user_controller = require('../controllers/user_controller');
 
 // create routes
 
-router.get('/',blog_controller.list_blogs);
+router.get('/:id',blog_controller.list_blogs);
 
 router.post('/create-blog', blog_controller.createBlog); //create blog
 
-router.get('/:id', blog_controller.blog_detail); //find specified blog detail
+router.get('/single/:id', blog_controller.blog_detail); //find specified blog detail
 
 router.put('/:id/update', blog_controller.blog_update); //update specified blog
 

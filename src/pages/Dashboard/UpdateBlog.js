@@ -22,6 +22,8 @@ export default function CreateBlog() {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
+    const [category, setCategory] = useState('');
+
 
     const routerHistory = useHistory();
 
@@ -29,11 +31,12 @@ export default function CreateBlog() {
     // get detail of single blog 
     useEffect(() => {
         async function fetchData() {
-            const res = await fetch(`/blogs/${id.blogId}`);
+            const res = await fetch(`/blogs/single/${id.blogId}`);
             res.json()
                 .then(res => (setAuthor(res.author),   // here res is the object of blog detail that contains id, title, author, description
                     setTitle(res.title), // setTitle call setTitle method in above hook and set the value of title to value in res.title
-                    setDescription(res.description))
+                    setDescription(res.description),
+                    setCategory(res.category))
                 )
                 .catch(err => setErrors(err));
         }
@@ -63,7 +66,7 @@ export default function CreateBlog() {
             .then(response => response.json())
             .then(res => swal({
                 title: "Updated!!",
-                text: "Your blog is updated successfully!",
+                text: "successfully Updated!",
                 icon: "success",
             }).then(function () {
                 routerHistory.push(`/dashboard/blog/${id.blogId}`);
@@ -76,20 +79,23 @@ export default function CreateBlog() {
         <div className="dashboard">
             <div className="row px-3 px-md-5 pt-lg-5">
                 <div className="col pt-5 pt-md-5 pt-lg-0">
-                    <h2 className="d-blog-sub-title mt-5 mt-md-0 mt-lg-0">Update Blog</h2>
+                    <h2 className="d-blog-sub-title mt-5 mt-md-0 mt-lg-0">{ category === 'blog' ? "Update Blog" : "Update Story"}</h2>
                 </div>
             </div>
             <div className="row px-3     px-md-0 px-lg-0">
                 <div className="col mx-2 mx-md-5 mx-lg-5 my-md-3  create-box">
                     <form>
                         <div className="px-1 py-1 px-md-3 px-lg-3 pt-md-3 pt-lg-3">
-                            <label className="form-label">Blog Title</label><br />
+
+                            <label className="form-label">{ category === 'blog' ? "Blog Title" : "Story Title"}</label><br />
                             <input className="form-field mt-0" type="text" value={title} onChange={onTitleChange}></input><br />
 
                             <label className="form-label">Author</label><br />
                             <input className="form-field mt-0" type="text" value={author} onChange={onAuthorChange} required></input><br />
 
-                            <label className="form-label mt-3">Blog</label> <br />
+                            <label className="form-label mt-3">{ category === 'blog' ? "Blog" : "Story"}</label> <br />
+
+                            
                             <Editor
                                 apiKey='ae8usjpq17flqzzs5cmkknz85iso0czxaieq68evxqpqg377'
                                 value={description}
@@ -120,7 +126,7 @@ export default function CreateBlog() {
                         </div>
                         <div className="mb-3 px-1 px-md-3 px-lg-3">
                             <button type="submit" className="delete-btn" onClick={handleSubmit}>Save</button>
-                            <Link to="/dashboard/blog"><button type="submit" className="delete-btn ml-2 mt-4 " >Cancel</button></Link>
+                            <Link to={ category === 'blog' ? "dashboard/blog" : "/dashboard/story"}><button type="submit" className="delete-btn ml-2 mt-4 " >Cancel</button></Link>
                         </div>
                     </form>
                 </div>

@@ -20,6 +20,10 @@ const blogSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    category: {
+        type: String,
+        default: 'blog'
+    },
     userId: {
         type: String,
         required: true

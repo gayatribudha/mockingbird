@@ -121,9 +121,13 @@ function App() {
         <DashboardRoute exact path="/dashboard" component={Dashboard} ></DashboardRoute>
         <DashboardRoute exact path="/dashboard/blog" component={DashBlog}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/profile" component={DashProfile}></DashboardRoute>
-        <DashboardRoute exact path="/dashboard/blog/:blogId" component={ShowBlog}></DashboardRoute>
-        <DashboardRoute exact path="/dashboard/create-blog" component={CreateBlog}></DashboardRoute>
-        <DashboardRoute exact path="/dashboard/update-blog/:blogId" component={UpdateBlog}></DashboardRoute>
+        <DashboardRoute exact path="/dashboard/:category/:blogId" component={ShowBlog}></DashboardRoute>
+
+
+        <DashboardRoute exact  path="/dashboard/create/new/:category" component={CreateBlog}></DashboardRoute>
+
+
+        <DashboardRoute exact path="/dashboard/blog/update-blog/:blogId" component={UpdateBlog}></DashboardRoute>
 
         <DashboardRoute exact path="/dashboard/story" component={DashStory}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/show-story" component={ShowStory}></DashboardRoute>

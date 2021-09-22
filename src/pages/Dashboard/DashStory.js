@@ -1,11 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import axios from "axios";
+import { useHistory } from 'react-router';
 
 import '../../assets/css/dashboard.css';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import DashBlogCard from '../../components/DashBlogCard/DashBlogCard';
 
 
 export default function DashStory() {
+
+    const [blogs, setBlogs] = useState([]);
+
+    const routerHistory = useHistory();
+
+    useEffect(() => {
+        let JWTToken = localStorage.getItem('user');
+        dashboard();
+        async function dashboard() {
+            try {
+                let res = await axios.get(`/blogs/story`, { headers: { "Authorization": `Bearer ${JWTToken}` } });
+                setBlogs(res.data);
+            }
+            catch (error) {
+                console.log(error);
+                routerHistory.push('/beapart');
+            }
+        }
+    }, []);
+
+    const [searchItem, setSearchItem] = useState();
+
+    const handleSearch = (e) => {
+        setSearchItem(e.target.value);
+    }
+
     return (
         <div className="dashboard">
             <div className="row px-3 px-md-5 pt-lg-5 flex flex-row">
@@ -15,7 +44,7 @@ export default function DashStory() {
                 </div>
                 <div className="col-9 pt-5 pt-md-5 pt-lg-0">
                     <div className="mt-5 mt-md-0 mt-lg-0">
-                        <Link to="/dashboard/create-story">
+                        <Link to="/dashboard/create/new/story">
                             <button className="create-blog-btn float-right">
                                 Create New Story
                             <svg className="position-absolute mx-2 mx-md-2 mx-lg-2 mt-md-1 mt-lg-1" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,24 +56,23 @@ export default function DashStory() {
                     </div>
                 </div>
             </div>
-            <div className="row px-4 px-md-5 px-lg-5  mt-4 mt-md-4 mt-lg-4">
-                {
-                    [1, 2, 3].map(n => (
-                        <div className="col-sm-12 col-md-5 col-lg-5 ml-md-4 ml-lg-4  mt-3 d-blog-card">
-                            <Link to="/dashboard/show-story" style={{ textDecoration: "none" }}>
-                                <div className="pt-3">
 
-                                    <h3 className="blog-title">Inside the city of glass and steel.</h3>
-                                    <p className="blog-para">Velit porro qui quo autem aut porro recusandae a. Quam molestias deserunt qu.
-                        Velit porro qui quo autem aut porro recusandae a.</p>
-                                </div>
-                            </Link>
-                            <form>
-                                <p className="hola"> Publish <input className="publish-checkbox" type="checkbox" name="publish" /></p>
-                            </form>
-                        </div>
-                    ))
+            <SearchBar handleSearch={handleSearch} />
+
+            <div className="row pl-4 pl-md-5 pl-lg-5  mt-4 mt-md-4 mt-lg-4 blogs-box">
+                {
+                    searchItem ?
+                        blogs.filter(blog => blog.title.includes(searchItem)).map(blog => (
+                            <DashBlogCard blog={blog} />
+                        ))
+
+                        :
+
+                        blogs.sort((blog1, blog2) => new Date(blog2.createdOn) - new Date(blog1.createdOn)).map(blog => (
+                            <DashBlogCard blog={blog} />
+                        ))
                 }
+
             </div>
         </div>
     )

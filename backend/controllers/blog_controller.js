@@ -3,18 +3,30 @@ const Blog = require('../models/blog_model');
 
 // list all blogs
 exports.list_blogs = function (req, res) {
-    console.log("In list blog controller")
     console.log(req.user._id);
-
-    Blog.find({ "userId": req.user._id }).select('-__v').then(blogs => {
-        res.status(200).json(blogs)
-    }).catch(error => {
-        console.log(error);
-        res.status(500).json({
-            message: "Error",
-            error: error
-        })
-    });
+    if (req.params.id === 'blog') {
+        Blog.find({ "userId": req.user._id, "category": 'blog' }).select('-__v').then(blogs => {
+            res.status(200).json(blogs)
+        }).catch(error => {
+            console.log(error);
+            res.status(500).json({
+                message: "Error",
+                error: error
+            })
+        });
+    } else if (req.params.id === 'story') {
+        Blog.find({ "userId": req.user._id, "category": 'story' }).select('-__v').then(blogs => {
+            res.status(200).json(blogs)
+        }).catch(error => {
+            console.log(error);
+            res.status(500).json({
+                message: "Error",
+                error: error
+            })
+        });
+    } else {
+        console.log("No right id in url.")
+    }
 };
 
 //create blog
@@ -23,6 +35,7 @@ exports.createBlog = function (req, res) {
         author: req.body.author,
         title: req.body.title,
         description: req.body.description,
+        category: req.body.category,
         userId: req.body.userId
     });
 
