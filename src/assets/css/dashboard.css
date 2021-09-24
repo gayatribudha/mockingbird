@@ -54,7 +54,7 @@
     border-radius: 10px;
     background-color: #ebebeb;
     height: 35px;
-    width: 50%;
+    width: 40%;
 }
 
 .form-field:focus {
@@ -171,13 +171,12 @@ input[type="file"] {
 }
 
 .blog-para {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
+   /* display: -webkit-box;   doesn't work in firefox but works in chromium */
+   overflow: hidden;
+   max-height: 3.7em;
 }
 
-/* pagination start */
+
 .pagination {
     display: flex;
     align-items: center;
@@ -249,10 +248,11 @@ input[type="file"] {
     width: 60%;
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
-.blogs-box::-webkit-scrollbar { /* WebKit */
+.blogs-box::-webkit-scrollbar {
+    /* WebKit */
     width: 0;
     height: 0;
 }
@@ -286,7 +286,7 @@ input[type="file"] {
     /* border-bottom-right-radius: 20px; */
     border-top: 0px;
     border-right: 0px;
-    border-bottom: 2px solid #e0e0e0;   
+    border-bottom: 2px solid #e0e0e0;
     /* background-color: white;  */
 }
 
@@ -336,7 +336,6 @@ input[type="file"] {
         height: 100%;
         width: 100%;
     }
-    
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -356,5 +355,7 @@ input[type="file"] {
         padding-top: 100px;
         margin-right: 5px;
     }
-    
+    .form-field {
+        width: 100%;
+    }
 }

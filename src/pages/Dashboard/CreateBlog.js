@@ -15,7 +15,7 @@ export default function CreateBlog(userInfo) {
     const [category, setCategory] = useState("");
     const [userId, setUserId] = useState("");
 
-    
+
     const urlCategory = useParams();
 
 
@@ -78,55 +78,40 @@ export default function CreateBlog(userInfo) {
             <div className="row px-3     px-md-0 px-lg-0">
                 <div className="col mx-2 mx-md-5 mx-lg-5 my-md-3  create-box">
                     <form onSubmit={handleSubmit}>
-                        <div className="px-1 py-1 px-md-3 px-lg-3 pt-md-3 pt-lg-3">
-                            <label className="form-label">{urlCategory.category === 'blog' ? "Blog Title" : "Story Title"}</label><br />
+                        <div className=" pt-md-3 pt-lg-3 d-lg-flex flex-row">
+                            <label className="form-label mt-1 mr-2">Title</label><br />
                             <input required className="requiredField form-field mt-0" type="text" value={title} onChange={onTitleChange}></input><br />
-                            <br />
 
 
-                            <label className="form-label">Author</label><br />
+
+                            <label className="form-label ml-lg-4 mt-1 mr-2">Author</label><br />
                             <input required className="form-field mt-0" type="text" value={author} onChange={onAuthorChange}></input><br />
 
                             <input hidden className="form-field mt-0" type="text" value={userId}></input><br />
-
-                            <label className="form-label mt-3">{urlCategory.category === 'blog' ? "Blog" : "Story"}</label> <br />
-                            <Editor required
-                                apiKey='ae8usjpq17flqzzs5cmkknz85iso0czxaieq68evxqpqg377'
-                                value={description}
-                                init={{
-                                    height: 300,
-                                    menubar: false
-                                }}
-                                onEditorChange={onDescriptionChange}
-                            />
-                            {/* <Editor
-                                onEditorChange={onDescriptionChange} required
-                                value={description}
-                                textareaName='description'
-                                apiKey='ae8usjpq17flqzzs5cmkknz85iso0czxaieq68evxqpqg377'
-                                onInit={(evt, editor) => editorRef.current = editor}
-                                initialValue="Write your blog here :)"                                init={{
-                                    height: 300,
-                                    menubar: false,
-                                    toolbar: 'undo redo | formatselect | ' +
-                                        'bold italic | alignleft aligncenter ' +
-                                        'alignright alignjustify | bullist numlist outdent indent',
-                                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                                }}
-                            /> */}
-
-
-                            {/* <textarea rows="10" className="mt-0" type="text" style={{ width: "100%" }} value={description} onChange={onDescriptionChange}></textarea> */}
-
+                        </div>
+                        <div>
+                            <label className="form-label mt-md-4 mt-lg-4">{urlCategory.category === 'blog' ? "Blog" : "Story"}</label> <br />
+                            <div>
+                                <Editor required
+                                    apiKey='ae8usjpq17flqzzs5cmkknz85iso0czxaieq68evxqpqg377'
+                                    value={description}
+                                    init={{
+                                        height: 300,
+                                        menubar: false
+                                    }}
+                                    onEditorChange={onDescriptionChange}
+                                />
+                            </div>
                         </div>
                         <div className="mb-3 px-1 px-md-3 px-lg-3">
                             <button type="submit" className="delete-btn" >Save</button>
                             <Link to={urlCategory.category === "blog" ? "/dashboard/blog" : "/dashboard/story"}><button className="delete-btn ml-2 mt-4 ">Cancel</button></Link>
                         </div>
+
                     </form>
                 </div>
 
             </div>
-        </div>
+        </div >
     )
 }
