@@ -39,9 +39,9 @@ export default function DashBlog(req) {
 
     const [searchItem, setSearchItem] = useState();
 
-    const handleSearch = (e) => {
-        setSearchItem(e.target.value);
-    }
+    // const handleSearch = (e) => {
+    //     setSearchItem(e.target.value);
+    // }
 
     return (
         <div className="dashboard">
@@ -61,12 +61,14 @@ export default function DashBlog(req) {
                             </button>
                         </Link>
 
-                        
+
                     </div>
                 </div>
             </div>
 
-            <SearchBar handleSearch={handleSearch} />
+
+            <SearchBar handleSearch={(e) => setSearchItem(e.target.value)} />
+
 
             <div className="row pl-4 pl-md-5 pl-lg-5 mt-4 mt-md-4 mt-lg-4 blogs-box">
 
