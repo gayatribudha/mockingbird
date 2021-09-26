@@ -55,6 +55,8 @@
     background-color: #ebebeb;
     height: 35px;
     width: 40%;
+    font-size: 17px;
+    text-indent: 10px;
 }
 
 .form-field:focus {
@@ -171,11 +173,10 @@ input[type="file"] {
 }
 
 .blog-para {
-   /* display: -webkit-box;   doesn't work in firefox but works in chromium */
-   overflow: hidden;
-   max-height: 3.7em;
+    /* display: -webkit-box;   doesn't work in firefox but works in chromium */
+    overflow: hidden;
+    max-height: 3.7em;
 }
-
 
 .pagination {
     display: flex;

@@ -127,7 +127,7 @@ function App() {
         <DashboardRoute exact  path="/dashboard/create/new/:category" component={CreateBlog}></DashboardRoute>
 
 
-        <DashboardRoute exact path="/dashboard/blog/update-blog/:blogId" component={UpdateBlog}></DashboardRoute>
+        <DashboardRoute exact path="/dashboard/:category/update/:blogId" component={UpdateBlog}></DashboardRoute>
 
         <DashboardRoute exact path="/dashboard/story" component={DashStory}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/show-story" component={ShowStory}></DashboardRoute>

@@ -14,6 +14,7 @@ export default function CreateBlog() {
 
     const id = useParams();
     console.log(id.blogId)
+    console.log(id.category);
 
     // get detail of that blog in the form fields
     //  here blog is an array which contain id, title, author and description
@@ -79,28 +80,29 @@ export default function CreateBlog() {
         <div className="dashboard">
             <div className="row px-3 px-md-5 pt-lg-5">
                 <div className="col pt-5 pt-md-5 pt-lg-0">
-                    <h2 className="d-blog-sub-title mt-5 mt-md-0 mt-lg-0">{ category === 'blog' ? "Update Blog" : "Update Story"}</h2>
+                    <h2 className="d-blog-sub-title mt-5 mt-md-0 mt-lg-0">{id.category === 'blog' ? "Update Blog" : "Update Story"}</h2>
                 </div>
             </div>
             <div className="row px-3     px-md-0 px-lg-0">
                 <div className="col mx-2 mx-md-5 mx-lg-5 my-md-3  create-box">
                     <form>
-                        <div className="px-1 py-1 px-md-3 px-lg-3 pt-md-3 pt-lg-3">
+                        <div className="pt-md-3 pt-lg-3 d-lg-flex flex-row">
 
-                            <label className="form-label">{ category === 'blog' ? "Blog Title" : "Story Title"}</label><br />
+                            <label className="form-label mt-1 mr-2">Title</label><br />
                             <input className="form-field mt-0" type="text" value={title} onChange={onTitleChange}></input><br />
 
-                            <label className="form-label">Author</label><br />
+                            <label className="form-label ml-lg-4 mt-1 mr-2">Author</label><br />
                             <input className="form-field mt-0" type="text" value={author} onChange={onAuthorChange} required></input><br />
 
-                            <label className="form-label mt-3">{ category === 'blog' ? "Blog" : "Story"}</label> <br />
 
-                            
+                        </div>
+                        <div>
+                            <label className="form-label mt-3">{id.category === 'blog' ? "Blog" : "Story"}</label> <br />
                             <Editor
                                 apiKey='ae8usjpq17flqzzs5cmkknz85iso0czxaieq68evxqpqg377'
                                 value={description}
                                 init={{
-                                    height: 500,
+                                    height: 300,
                                     menubar: false
                                 }}
                                 onEditorChange={onDescriptionChange}
@@ -126,7 +128,7 @@ export default function CreateBlog() {
                         </div>
                         <div className="mb-3 px-1 px-md-3 px-lg-3">
                             <button type="submit" className="delete-btn" onClick={handleSubmit}>Save</button>
-                            <Link to={ category === 'blog' ? "dashboard/blog" : "/dashboard/story"}><button type="submit" className="delete-btn ml-2 mt-4 " >Cancel</button></Link>
+                            <Link to={id.category === 'blog' ? "/dashboard/blog" : "/dashboard/story"}><button type="submit" className="delete-btn ml-2 mt-4 " >Cancel</button></Link>
                         </div>
                     </form>
                 </div>

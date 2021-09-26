@@ -95,7 +95,7 @@ export default function ShowBlog() {
                 </div>
                 <div className="col-sm-12 col-md-7 col-lg-7 pt-5 pt-md-5 pt-lg-0 d-none d-sm-none d-md-block d-lg-block">
                     <div className="mt-5 mt-md-0 mt-lg-0 float-right">
-                        <Link to={`/dashboard/blog/update-blog/${blog._id}`}>
+                        <Link to={`/dashboard/${blog.category}/update/${blog._id}`}>
                             <button className="delete-btn">Update</button>
                         </Link>
 
@@ -125,10 +125,10 @@ export default function ShowBlog() {
             {/* For mobile view */}
             <div className="row my-2 mx-5 pb-5  d-block d-md-none d-lg-none">
                 <div className="col ">
-                    <Link to={`/dashboard/update-blog/${blog._id}`}>
+                    <Link to={`/dashboard/${blog.category}/update/${blog._id}`}>
                         <button className="delete-btn">Update</button>
                     </Link>
-                    <Link to={'/dashboard/blog'}>
+                    <Link to={blog.category === 'blog' ? '/dashboard/blog' : '/dashboard/story'}>
                         <button type="submit" className="ml-2 delete-btn" onClick={confirmDelete}>Delete</button>
                     </Link>
                 </div>
