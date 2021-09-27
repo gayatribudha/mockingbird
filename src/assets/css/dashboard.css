@@ -63,6 +63,10 @@
     border: 1px solid #ba14bd;
     background-color: white;
 }
+.form-field:hover{
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.25);
+
+}
 
 .delete-btn {
     background-color: white;
@@ -157,15 +161,19 @@ input[type="file"] {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
-    background-color: #919191;
+    background-color: #ebebeb;
     font-size: 16px;
     font-weight: bold;
-    color: #fff;
+    color: #a09f9f;
     width: 100%;
 }
 
 .profile-upload-btn:hover {
     box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+#blog-cover-picture{
+    width: 30%;
 }
 
 .p-contact {
@@ -337,6 +345,9 @@ input[type="file"] {
         height: 100%;
         width: 100%;
     }
+    #blog-cover-picture{
+        width: 100%;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -357,6 +368,9 @@ input[type="file"] {
         margin-right: 5px;
     }
     .form-field {
+        width: 100%;
+    }
+    #blog-cover-picture{
         width: 100%;
     }
 }

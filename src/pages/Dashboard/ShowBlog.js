@@ -114,8 +114,13 @@ export default function ShowBlog() {
                         {blog.title}
 
                     </h3>
+                    {/* <div>
+                        <img src={blog.coverPicture ? `http://localhost:3001/` + blog.coverPicture : "Nothing"} alt="profile" style={{height: "100%", height: "150px"}}/>
+                    </div> */}
                     <div className="" style={{ height: "380px", overflowY: "scroll" }}>
-
+                        <div>
+                            <img className="float-right mr-3" src={blog.coverPicture ? `http://localhost:3001/` + blog.coverPicture : "Nothing"} alt="profile" style={{height: "100%", height: "150px"}}/>
+                        </div>
                         <div dangerouslySetInnerHTML={{ __html: blog.description }}></div>
 
                     </div>

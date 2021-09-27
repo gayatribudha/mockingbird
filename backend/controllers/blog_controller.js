@@ -1,5 +1,9 @@
 //importing blog model
 const Blog = require('../models/blog_model');
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
+let path = require('path');
+
 
 // list all blogs
 exports.list_blogs = function (req, res) {
@@ -29,28 +33,75 @@ exports.list_blogs = function (req, res) {
     }
 };
 
+
 //create blog
-exports.createBlog = function (req, res) {
-    const blog = new Blog({
-        author: req.body.author,
-        title: req.body.title,
-        description: req.body.description,
-        category: req.body.category,
-        userId: req.body.userId
-    });
 
-    console.log(blog);
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'images');
+    },
+    filename: function (req, file, cb) {
+        cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
 
+const fileFilter = (req, file, cb) => {
+    const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    if (allowedFileTypes.includes(file.mimetype)) {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+}
 
-    blog.save().then(data => {
-        res.status(200).json(data);
-    }).catch(err => {
-        res.status(500).json({
-            message: "Fail!",
-            error: err.message
+let createBlog = (req, res) => {
+    console.log(req.file);
+    if (req.file === undefined) {
+        const blog = new Blog({
+            author: req.body.author,
+            title: req.body.title,
+            description: req.body.description,
+            category: req.body.category,
+            userId: req.body.userId
         });
-    });
+
+        console.log(blog);
+
+
+        blog.save().then(data => {
+            res.status(200).json(data);
+        }).catch(err => {
+            res.status(500).json({
+                message: "Fail!",
+                error: err.message
+            });
+        });
+    } else {
+        const blog = new Blog({
+            author: req.body.author,
+            title: req.body.title,
+            description: req.body.description,
+            category: req.body.category,
+            coverPicture: req.file.filename,
+            userId: req.body.userId
+        });
+
+        console.log(blog);
+
+        blog.save().then(data => {
+            res.status(200).json(data);
+        }).catch(err => {
+            res.status(500).json({
+                message: "Fail!",
+                error: err.message
+            });
+        });
+    }
 };
+
+let upload = multer({ storage, fileFilter });
+exports.multerMiddleware = upload.single('coverPicture');
+exports.createBlog = createBlog;
 
 //give single blog
 exports.blog_detail = function (req, res) {

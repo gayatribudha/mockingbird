@@ -24,6 +24,9 @@ const blogSchema = new mongoose.Schema({
         type: String,
         default: 'blog'
     },
+    coverPicture: {
+        type: String
+    },
     userId: {
         type: String,
         required: true
