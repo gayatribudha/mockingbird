@@ -7,8 +7,17 @@ let path = require('path');
 
 // list all blogs
 exports.list_blogs = function (req, res) {
-    console.log(req.user._id);
-    if (req.params.id === 'blog') {
+    if (req.params.id == 'blogPreview') {
+        Blog.find({ "category": "blog" }).select('-__v').then(blogs => {
+            res.status(200).json(blogs.filter(blog=>blog.publish))
+        }).catch(error => {
+            console.log(error);
+            res.status(500).json({
+                message: "Error",
+                error: error
+            })
+        });
+    } else if (req.params.id === 'blog') {
         Blog.find({ "userId": req.user._id, "category": 'blog' }).select('-__v').then(blogs => {
             res.status(200).json(blogs)
         }).catch(error => {
@@ -28,8 +37,9 @@ exports.list_blogs = function (req, res) {
                 error: error
             })
         });
+
     } else {
-        console.log("No right id in url.")
+        console.log("Error");
     }
 };
 

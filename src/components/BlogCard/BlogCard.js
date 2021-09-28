@@ -1,22 +1,20 @@
-import React from 'react'
+import React from 'react';
+import { Link } from "react-router-dom";
 import cover from '../../assets/images/cover.jpg';
 import './BlogCard.css';
 
-export default function BlogCard() {
+export default function BlogCard({ blog }) {
     return (
         <div className="row">
             <div className="col-sm-12 col-md-4 col-lg-4">
-                <a href="/blog/title"><img className="cover-picture img-fluid" src={cover} alt="cover" /></a>
+                <Link to="/blog/title"><img className="cover-picture img-fluid" src={blog.coverPicture ? `http://localhost:3001/` + blog.coverPicture : "Nothing"} alt="cover" style={{height: "120px", width: "150px"}}/></Link>
             </div>
             <div className="col-sm-12 col-md-8 col-lg-8">
-                <a href="/blog/title" style={{textDecoration:"none"}}>
-                    <h2 className="blog-title mt-2">Inside the city of glass and steels.</h2>
-                    <h3 className="blog-author">Shital Agrawal</h3>
-                    <p className="blog-description">Lorem Ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi ut aliquip ex ea commodo consequat.  </p>
-                </a>
+                <Link to="/blog/title" style={{ textDecoration: "none" }}>
+                    <h2 className="blog-title mt-1">{blog.title}</h2>
+                    <h3 className="blog-author">{blog.author}</h3>
+                    <div className="blog-description" dangerouslySetInnerHTML={{ __html: blog.description }}></div>
+                </Link>
             </div>
         </div>
     )

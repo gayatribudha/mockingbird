@@ -11,7 +11,7 @@ export default function SingleStory() {
                     <img className="cover-picture img-fluid" src={cover} alt="cover" style={{height:"300px", width: "100%"}}/>
                     <h2 className="mt-4 blog-title mt-2">Inside the city of glass and steels.</h2>
                     <h3 className="mt-2 blog-author">Shital Agrawal</h3>
-                    <p className="mt-2 mt-md-4 mt-lg-4 blog-description">Lorem Ipsum dolor sit amet, consectetur adipiscing elit,
+                    <p className="mt-2 mt-md-4 mt-lg-4">Lorem Ipsum dolor sit amet, consectetur adipiscing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
                     nisi ut aliquip ex ea commodo consequat. <br />

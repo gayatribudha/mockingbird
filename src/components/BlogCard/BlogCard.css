@@ -11,6 +11,10 @@
 }
 
 .blog-description {
-    font-size: 15px !important;
-    font-weight: 400;
+    overflow: hidden;
+    max-height: 55px;
+}
+.blog-description p {
+    font-size: 0.8rem;
+    line-height: 1.3em;
 }
