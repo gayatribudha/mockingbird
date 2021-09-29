@@ -7,9 +7,19 @@ let path = require('path');
 
 // list all blogs
 exports.list_blogs = function (req, res) {
-    if (req.params.id == 'blogPreview') {
+    if (req.params.id === 'blogPreview') {
         Blog.find({ "category": "blog" }).select('-__v').then(blogs => {
-            res.status(200).json(blogs.filter(blog=>blog.publish))
+            res.status(200).json(blogs.filter(blog => blog.publish))
+        }).catch(error => {
+            console.log(error);
+            res.status(500).json({
+                message: "Error",
+                error: error
+            })
+        });
+    } else if (req.params.id === 'storyPreview') {
+        Blog.find({ "category": "story" }).select('-__v').then(blogs => {
+            res.status(200).json(blogs.filter(blog => blog.publish))
         }).catch(error => {
             console.log(error);
             res.status(500).json({

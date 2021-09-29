@@ -6,20 +6,25 @@
 .story-author {
     font-size: 17px !important;
     font-weight: 400;
-    color:rgb(68, 68, 68)
+    color: rgb(68, 68, 68);
 }
 
 .story-title {
-    color: #BA14BD;
+    color: #ba14bd;
     font-weight: 500;
     font-size: 23px !important;
 }
 
 .story-description {
     color: #494949;
-    font-size: 17px !important;
     font-weight: 500;
+    overflow: hidden;
+    max-height: 190px;
+}
 
+.story-description p {
+    font-size: 0.9rem;
+    line-height: 1.3em;
 }
 
 .bird-icon {
