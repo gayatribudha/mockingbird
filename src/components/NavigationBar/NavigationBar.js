@@ -25,7 +25,7 @@ export default function NavigationBar() {
               <NavLink activeClassName="menu_active" exact className="nav-link active" aria-current="page" to="/">Home</NavLink>
             </li>
             <li className="nav-item mx-2">
-              <NavLink activeClassName="menu_active" className="nav-link" to="/blog">Blog</NavLink>
+              <NavLink activeClassName="menu_active" className="nav-link" to="/blogs">Blog</NavLink>
             </li>
             <li className="nav-item mx-2">
               <NavLink activeClassName="menu_active" className="nav-link" to="/story">Story</NavLink>

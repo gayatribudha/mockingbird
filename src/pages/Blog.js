@@ -1,10 +1,26 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react';
+import axios from "axios";
 
 import BlogCard from '../components/BlogCard/BlogCard';
 import Footer from '../partials/Footer/Footer';
 
 
 export default function Blog() {
+    const [blogs, setBlogs] = useState([]);
+
+    useEffect(() => {
+        blogsList()
+        async function blogsList() {
+            try {
+                let res = await axios.get(`/blogs/blogPreview`);
+                setBlogs(res.data);
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+    }, []);
+
     return (
         <div className="container-fluid">
             <div className="row mt-3 mx-md-5 mx-lg-5 px-md-4 px-lg-4 ">
@@ -17,9 +33,9 @@ export default function Blog() {
             </div>
             <div className="row mt-3 mb-5 mx-md-5 mx-md-3 px-md-4 px-lg-4 ">
                 {
-                    [1, 2, 3, 4].map(n => (
-                        <div key={n} className="col-sm-12 col-md-6 col-md-6 mt-4 ">
-                            <BlogCard />
+                    blogs.map(blog => (
+                        <div key={blog._id} className="col-sm-12 col-md-6 col-md-6 mt-4 ">
+                            <BlogCard blog = {blog} />
                         </div>
                     ))
                 }

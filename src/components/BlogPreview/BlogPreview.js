@@ -43,7 +43,7 @@ export default function BlogPreview() {
                     </div>
                     <div className="row my-4">
                         {
-                            blogs.map(blog => (
+                            blogs.slice(0, 4).map(blog => (
                                 <div key={blog._id} className="col-sm-12 col-md-6 col-md-6 mt-4 ">
                                     <BlogCard blog={blog} />
                                 </div>
