@@ -110,12 +110,12 @@ function App() {
     <div className="App">
       <Router>
         <WebsiteRoute exact path="/" component={Home}></WebsiteRoute>
-        <WebsiteRoute exact path="/story" component={Story}></WebsiteRoute>
+        <WebsiteRoute exact path="/stories" component={Story}></WebsiteRoute>
         <WebsiteRoute exact path="/blogs" component={Blog}></WebsiteRoute>
         <WebsiteRoute exact path="/beapart" component={BeAPart}></WebsiteRoute>
         <WebsiteRoute exact path="/register" component={Register}></WebsiteRoute>
 
-        <WebsiteRoute exact path="/story/:id" component={SingleStory}></WebsiteRoute>
+        <WebsiteRoute exact path="/stories/:id" component={SingleStory}></WebsiteRoute>
         <WebsiteRoute exact path="/blogs/:id" component={SingleBlog}></WebsiteRoute>
 
         <DashboardRoute exact path="/dashboard" component={Dashboard} ></DashboardRoute>

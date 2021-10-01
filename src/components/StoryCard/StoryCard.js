@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import { Link } from "react-router-dom";
 import profile from '../../assets/images/profile.jpg';
 import birdIcon from '../../assets/images/birdIcon.png';
 
@@ -19,7 +20,7 @@ export default function StoryCard({ story }) {
             }
         }
 
-    })
+    }, [])
     return (
         <div className="row">
             <div className="col d-flex flex-column">
@@ -27,10 +28,10 @@ export default function StoryCard({ story }) {
                 <img className="profile-picture rounded-circle mx-auto" src={photo ? `http://localhost:3001/` + photo : "No Photo"} alt="profile" />
 
                 <h2 className=" story-author text-center mt-3">{story.author}</h2>
-                <a style={{ textDecoration: "none" }} href="/story/title"><h2 className=" story-title text-center">{story.title}</h2></a>
+                <Link style={{ textDecoration: "none" }} to={`/stories/${story._id}`} ><h2 className=" story-title text-center">{story.title}</h2></Link>
                 <div className="story-description text-center" dangerouslySetInnerHTML={{ __html: story.description }}></div>
 
-                <img className="bird-icon mx-auto" src={birdIcon} alt="bird icon" />
+                <img className="bird-icon mx-auto mt-3" src={birdIcon} alt="bird icon" />
             </div>
 
         </div>

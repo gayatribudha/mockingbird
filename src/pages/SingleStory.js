@@ -1,37 +1,62 @@
-import React from 'react';
-import profile from '../assets/images/profile.jpg';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import { Link, useParams } from 'react-router-dom';
 import Footer from '../partials/Footer/Footer';
 
 export default function SingleStory() {
+
+    const id = useParams();
+    console.log(id);
+    const [title, setTitle] = useState();
+    const [author, setAuthor] = useState();
+    const [description, setDescription] = useState();
+    const [coverPicture, setCoverPicture] = useState();
+    const [userId, setUserId] = useState();
+    const [photo, setPhoto] = useState();
+
+
+    useEffect(() => {
+        getBlogDetail()
+        async function getBlogDetail() {
+            try {
+                let res = await axios.get(`/blogs/single/${id.id}`);
+                setTitle(res.data.title);
+                setAuthor(res.data.author);
+                setDescription(res.data.description);
+                setCoverPicture(res.data.coverPicture);
+                setUserId(res.data.userId);
+                getProfilePhoto();
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+
+    });
+
+    const getProfilePhoto = () => {
+
+        profilePicture()
+        async function profilePicture() {
+            try {
+                let res = await axios.get(`/${userId}/userDetail`);
+                setPhoto(res.data.photo);
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+
+    }
+
     return (
         <div className="container-fluid">
             <div className="row my-5 mx-md-5 mx-lg-5 px-md-5 px-lg-5 ">
                 <div className="col mb-5 mx-md-5 mx-lg-5 px-md-5 px-lg-5 d-flex flex-column">
-                    <img className="profile-picture rounded-circle mx-auto" src={profile} alt="profile" />
-
-                    <h2 className="story-author text-center mt-3">Shreywont Khanal</h2>
-                    <a style={{ textDecoration: "none" }} href="/story/title"><h2 className=" mt-3 story-title text-center">The only option I has was to stay.</h2></a>
-                    <p className=" mt-4 story-description text-center">Lorem Ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. <br />
-                    Lorem Ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Lorem Ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur.<br />
-                    Lorem Ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur.
-
-                    </p>
+                    <img className="profile-picture rounded-circle mx-auto" src={photo ? `http://localhost:3001/` + photo : "Nothing"} alt="profile" />
+                    <h2 className="story-author text-center mt-3">{author}</h2>
+                    <h2 className=" mt-3 story-title text-center">{title}</h2>
+                    <div className="mt-4 story-description text-center" dangerouslySetInnerHTML={{ __html: description }}></div>
                 </div>
             </div>
             <Footer />
