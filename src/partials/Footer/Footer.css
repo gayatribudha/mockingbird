@@ -47,6 +47,7 @@ p {
 }
 
 .form-input {
+    text-indent: 5px;
     border-top-style: hidden;
     border-right-style: hidden;
     border-left-style: hidden;
@@ -72,8 +73,13 @@ input:focus {
     width: 100%;
     border: 0px;
     height: 40px;
+    border: 2px solid white;
+    background-color: #730875;
+    color: white;
+
 }
 .form-button:hover {
+    color: #730875;
     background-color: white;
 
 }

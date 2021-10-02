@@ -12,6 +12,7 @@
     "bootstrap": "^4.6.0",
     "cors": "^2.8.5",
     "draft-js": "^0.11.7",
+    "emailjs-com": "^3.2.0",
     "froala-editor": "^3.2.7",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
