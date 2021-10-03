@@ -147,7 +147,7 @@ export default function Register() {
                             <input type="password" className="login-input mt-3" placeholder="Password" value={password} onChange={onPasswordChange} /><br />
                             <div className="error ml-3 mt-2 " style={{ display: errorPassword ? "block" : "none" }}>Password is required with at least of 8 digit.</div>
 
-                            <input type="password" className="login-input mt-3" placeholder="Confirm Password" style={{ borderColor: passwordmatch ? "" : "red" }} value={confirmPassword} onChange={onConfirmPasswordChange} /><br />
+                            <input type="password" className="login-input mt-3" placeholder="Confirm Password" required style={{ borderColor: passwordmatch ? "" : "red" }} value={confirmPassword} onChange={onConfirmPasswordChange} /><br />
                             <div className="error ml-3 mt-2 " style={{ display: passwordmatch ? "none" : "block" }}>Password and Confirm Password don't match.</div>
 
                             <button className="login-button mt-4" type="submit">REGISTER</button>

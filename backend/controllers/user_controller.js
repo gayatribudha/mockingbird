@@ -18,6 +18,7 @@ exports.register = function (req, res) {
         return res.status(401).json({ error: "invalidentries" });
     }
 
+    
     User.findOne({ email: req.body.email }).then(user => {
         if (user) {
             return res.status(402).json({ error: "user already exists" });
