@@ -7,6 +7,9 @@ const validator = require('validator');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 let path = require('path');
+const nodemailer = require('nodemailer');
+
+
 
 
 // list all stored stories
@@ -18,12 +21,34 @@ exports.register = function (req, res) {
         return res.status(401).json({ error: "invalidentries" });
     }
 
-    
+
+    let mailTransporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'trigbtech@gmail.com',
+            pass: 'triyaga2020'
+        }
+    });
+
+    let mailDetails = {
+        from: 'trigbtech@gmail.com',
+        to: 'gayatribudha5@gmail.com',
+        subject: 'Test mail',
+        text: 'Testing nodemailer'
+    };
+
+    mailTransporter.sendMail(mailDetails, function (err, data) {
+        if (err) {
+            console.log('Error Occurs');
+        } else {
+            console.log('Email sent successfully');
+        }
+    });
+
     User.findOne({ email: req.body.email }).then(user => {
         if (user) {
             return res.status(402).json({ error: "user already exists" });
         }
-        //error case
         else {
             console.log(req.body);
             const newUser = new User({
@@ -41,18 +66,6 @@ exports.register = function (req, res) {
                 user.hash_password = undefined;
                 res.status(201).json(user);
             });
-
-            // bcrypt.genSalt(10, (err, salt) => {
-            //     bcrypt.hash(newUser.password, salt, (err, hash) => {
-            //         if (err) throw err;
-            //         newUser.password = hash;
-
-            //         newUser
-            //             .save()
-            //             .then(user => res.json(user))
-            //             .catch(err => console.log(err));
-            //     });
-            // });
         }
     })
 };
