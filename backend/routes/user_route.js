@@ -5,6 +5,9 @@ const user_controller = require('../controllers/user_controller');
 
 router.post('/register', user_controller.register);
 
+router.post('/confirmRegister', user_controller.confirmRegister);
+
+
 router.post('/login', user_controller.login);
 
 router.get('/dashboard',user_controller.loginRequired, user_controller.dashboard);

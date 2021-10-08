@@ -106,7 +106,7 @@ export default function Register() {
                             text: "Thank you for joining Mockingbird.",
                             icon: "success"
                         });
-                        routerHistory.push('/beapart');
+                        // routerHistory.push('/beapart');
                     } else {
                         
                         throw new Error(setErrorEmailExist(true));

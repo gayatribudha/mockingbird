@@ -1,5 +1,6 @@
 require('dotenv').config();
 const User = require('../models/user_model');
+const PendingUser = require('../models/pending_user_model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../config');
@@ -22,53 +23,80 @@ exports.register = function (req, res) {
     }
 
 
-    let mailTransporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'trigbtech@gmail.com',
-            pass: 'triyaga2020'
-        }
-    });
-
-    let mailDetails = {
-        from: 'trigbtech@gmail.com',
-        to: 'gayatribudha5@gmail.com',
-        subject: 'Test mail',
-        text: 'Testing nodemailer'
-    };
-
-    mailTransporter.sendMail(mailDetails, function (err, data) {
-        if (err) {
-            console.log('Error Occurs');
-        } else {
-            console.log('Email sent successfully');
-        }
-    });
-
     User.findOne({ email: req.body.email }).then(user => {
         if (user) {
             return res.status(402).json({ error: "user already exists" });
         }
         else {
             console.log(req.body);
-            const newUser = new User({
+
+            function generateRandomNumber() {
+                var minm = 100000;
+                var maxm = 999999;
+                return Math.floor(Math
+                    .random() * (maxm - minm + 1)) + minm;
+            }
+
+            let pin = generateRandomNumber().toString();
+            console.log(pin);
+
+            let mailTransporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'trigbtech@gmail.com',
+                    pass: 'triyaga2020'
+                }
+            });
+
+            let mailDetails = {
+                from: 'trigbtech@gmail.com',
+                to: req.body.email,
+                subject: 'Test mail',
+                text: `Your pin code is ${pin}. Please go through this link to put your pin in http://localhost:3000/confirmation.`,
+        
+            };
+
+            mailTransporter.sendMail(mailDetails, function (err, data) {
+                if (err) {
+                    console.log('Error Occurs');
+                } else {
+                    console.log('Email sent successfully');
+                }
+            });
+
+            const newPendingUser = new PendingUser({
                 username: req.body.username,
                 fullname: req.body.fullname,
                 email: req.body.email,
                 password: req.body.password,
+                pin: pin
             })
 
-            newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
-            newUser.save((err, user) => {
+            newPendingUser.hash_password = bcrypt.hashSync(req.body.password, 10);
+
+            newPendingUser.save((err, user) => {
                 if (err) {
-                    res.status(500).send({ message: err });
+                    res.status(500).send({message: err})
                 }
                 user.hash_password = undefined;
                 res.status(201).json(user);
-            });
+            })
+
+
+            // newUser.save((err, user) => {
+            //     if (err) {
+            //         res.status(500).send({ message: err });
+            //     }
+            //     user.hash_password = undefined;
+            //     res.status(201).json(user);
+            // });
         }
     })
 };
+
+exports.confirmRegister = function(req, res) {
+    console.log('In confirm register.');
+}
 
 exports.login = function (req, res) {
     User.findOne({

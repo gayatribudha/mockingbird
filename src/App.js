@@ -11,6 +11,8 @@ import BeAPart from './pages/BeAPart';
 import SingleStory from './pages/SingleStory';
 import SingleBlog from './pages/SingleBlog';
 import Register from './pages/Register';
+import Confirmation from './pages/Confirmation';
+
 
 
 import Dashboard from './pages/Dashboard/Dashboard';
@@ -114,6 +116,8 @@ function App() {
         <WebsiteRoute exact path="/blogs" component={Blog}></WebsiteRoute>
         <WebsiteRoute exact path="/beapart" component={BeAPart}></WebsiteRoute>
         <WebsiteRoute exact path="/register" component={Register}></WebsiteRoute>
+        <WebsiteRoute exact path="/confirmation" component={Confirmation}></WebsiteRoute>
+
 
         <WebsiteRoute exact path="/stories/:id" component={SingleStory}></WebsiteRoute>
         <WebsiteRoute exact path="/blogs/:id" component={SingleBlog}></WebsiteRoute>
