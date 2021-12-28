@@ -1,5 +1,6 @@
 require('dotenv').config();
 const User = require('../models/user_model');
+const User = require('../models/user_model');
 const PendingUser = require('../models/pending_user_model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -43,16 +44,17 @@ exports.register = function (req, res) {
             let mailTransporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: 'trigbtech@gmail.com',
-                    pass: 'triyaga2020'
+                    user: 'yourEmail',
+                    pass: 'yourPassword'
                 }
             });
 
             let mailDetails = {
                 from: 'trigbtech@gmail.com',
                 to: req.body.email,
-                subject: 'Test mail',
-                text: `Your pin code is ${pin}. Please go through this link to put your pin in http://localhost:3000/confirmation.`,
+                subject: 'Please confirm your Email account',
+                text: `Click the following link to verify your email http://localhost:3000/confirmEmail/${pin}.`,
+                html: `Click on the link to verify your email. <br> <a href="link">Click here to verify.</a>`
         
             };
 
@@ -96,6 +98,22 @@ exports.register = function (req, res) {
 
 exports.confirmRegister = function(req, res) {
     console.log('In confirm register.');
+}
+
+exports.confirmEmail = function(req, res, next) {
+    PendingUser.findOne({
+        pin: req.params.pin,
+    })
+    .then((pendingUser) => {
+        if (!pendingUser) {
+            return res.status(404).send({message: "Pending User not found"});
+        }
+
+        pendingUser
+    })
+    console.log('In confirm email');
+    console.log(pin);
+    console.log(req.params.pin);
 }
 
 exports.login = function (req, res) {

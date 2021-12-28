@@ -16,7 +16,9 @@ router.put('/:id/updateProfile', user_controller.multerMiddleware, user_controll
 
 router.put('/:id/changePassword', user_controller.changePassword);    
 
-
 router.get('/:id/userDetail', user_controller.userDetail);
+
+router.get('/confirmEmail/:pin', user_controller.confirmEmail);
+
 
 module.exports = router;
